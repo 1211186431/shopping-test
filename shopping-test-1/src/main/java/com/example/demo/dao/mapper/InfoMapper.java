@@ -25,7 +25,7 @@ public interface InfoMapper extends BaseMapper<ShoppingInfo>{
     
     @Insert("insert into shopping1(name,price,other)"
     		+" values(#{name},#{price},#{other})")
-    //@SelectKey(statement ="select last_insert_id()",keyProperty="id",before=false,resultType=int.class)
+    @SelectKey(statement ="select last_insert_id()",keyProperty="id",before=false,resultType=int.class)
     public Long insertOne(ShoppingInfo shoppingInfo); 
     
     @Update("update shopping1 set price=#{price}, other=#{other},name=#{name} where id=#{id}")
