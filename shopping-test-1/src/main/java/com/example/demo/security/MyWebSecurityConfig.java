@@ -51,7 +51,7 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/getAll").hasRole("admin").and().formLogin()
+		http.authorizeRequests().antMatchers("/getAll").hasRole("admin").and().formLogin().loginPage("http://localhost:8080/login")
 				.loginProcessingUrl("/login").usernameParameter("name").passwordParameter("password")
 				.successHandler(new AuthenticationSuccessHandler() {
 
@@ -79,7 +79,7 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 						// TODO Auto-generated method stub
 						response.setContentType("application/json;charset=utf-8");
 						PrintWriter out = response.getWriter();
-						response.setStatus(401);
+						//response.setStatus(401);   //如果不注释，前端报错，没有信息
 						Map<String, Object> map = new HashMap<>();
 						map.put("status", 401);
 						if(exception instanceof LockedException) {

@@ -72,12 +72,11 @@ public class ShoppingController {
 	@PostMapping("/shopping/up")
 	public void upfile(@RequestParam("file")MultipartFile file) throws IOException {
 		if (file == null) return ;
-		 
 	    String fileName = file.getOriginalFilename();
 	    log.info(fileName);
 	    FileOutputStream fos;
 		try {
-			fos = new FileOutputStream(new File("D:"+"//" +fileName));
+			fos = new FileOutputStream(new File("src/main/resources/static/audit/" +fileName));
 		    IOUtils.copy(file.getInputStream(),fos);
 			//将MultipartFile file转成二进制流并输入到FileOutStream
 			fos.close();
