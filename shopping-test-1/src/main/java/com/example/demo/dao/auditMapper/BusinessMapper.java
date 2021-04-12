@@ -17,7 +17,7 @@ public interface BusinessMapper extends BaseMapper<BusinessAudit>{
 	@Select("select * from business_audit where user_id=#{userId}")
      public ArrayList<BusinessAudit> getBusinessAuditByUserId(int userId); 
 	
-	@Select("select * from business_audit where user_id=#{adminId}")
+	@Select("select * from business_audit where admin_id=#{adminId}")
     public ArrayList<BusinessAudit> getBusinessAuditByAdminId(int adminId);
 	
 	@Insert("insert into business_audit(user_id,admin_id,certificates,createDate,updateTime)"

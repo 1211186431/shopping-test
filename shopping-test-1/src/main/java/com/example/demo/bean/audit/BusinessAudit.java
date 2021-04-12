@@ -2,7 +2,6 @@ package com.example.demo.bean.audit;
 
 import java.util.Date;
 
-import com.example.demo.bean.AdminInfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

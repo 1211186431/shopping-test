@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SellerInfo {
-    private int id;
+   
     private int user_id;
     private int score;
     private int state;

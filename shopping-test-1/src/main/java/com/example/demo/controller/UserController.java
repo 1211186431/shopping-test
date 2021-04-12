@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,11 +29,19 @@ public class UserController {
 	}
 	
 	@PostMapping("/register")
-	public String register(@RequestParam("name") String name,@RequestParam("password") String password,@RequestParam("phone") String phone){
-		UserInfo userInfo=new UserInfo(name,password,phone);
+	public Map<String,String> register(@RequestParam("name") String name,@RequestParam("password") String password,@RequestParam("phone") String phone){
+		UserInfo userInfo=new UserInfo(name,password,phone,"ROLE_user");
 		
-		
-		return "注册成功:"+this.userService.insertOne(userInfo);
+		Map<String,String> map=new HashMap<>();
+		String s=this.userService.insertOne(userInfo);
+		map.put("msg", s);
+		if(s.equals("创建成功")) {
+			map.put("state","1");
+		}
+		else {
+		   map.put("state", "0");	
+		}
+		return map;
 	}
 	
 }

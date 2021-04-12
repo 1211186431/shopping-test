@@ -15,18 +15,26 @@ import com.example.demo.bean.UserInfo;
 
 @Mapper
 public interface UserMapper extends BaseMapper<UserInfo>{
-	@Select("select * from user")
+	@Select("select * from user where role=\"ROLE_user\"")
 	public List<UserInfo> getAllUser();
     
+	@Select("select * from user where role=\"ROLE_admin\"")
+	public List<UserInfo> getAllAdmin();
+	
 	@Select("select * from user where name = #{name}")
     public UserInfo getByName(String name);
 	
-
+    @Select("select id from user where role=\"ROLE_admin\" and state=1")  
+    public ArrayList<Integer> getAdminId();
+    
 	@Select("select name from user")
 	public ArrayList<String> getAllName();
     
-    @Insert("insert into user(name,password,phone)"
-    		+" values(#{name},#{password},#{phone})")
+    @Insert("insert into user(name,password,phone,role)"
+    		+" values(#{name},#{password},#{phone},#{role})")
     @SelectKey(statement ="select last_insert_id()",keyProperty="id",before=false,resultType=int.class)
     public int insertOne(UserInfo userInfo); 
+    
+    @Select("select state from user where id=#{userId}")
+    public int getUserState(int userId);
 }

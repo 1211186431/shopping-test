@@ -2,28 +2,38 @@ package com.example.demo.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.audit.BusinessAudit;
 import com.example.demo.dao.auditMapper.BusinessMapper;
+import com.example.demo.dao.userMapper.UserMapper;
 import com.example.demo.service.AuditService;
 @Service
 public class AuditServiceImpl implements AuditService {
     @Autowired
     BusinessMapper bMapper;
     
+    @Autowired
+    UserMapper uMapper;
+    
 	@Override
 	public int insertAudit(BusinessAudit b) {
 		// TODO Auto-generated method stub
-		return this.bMapper.insertAudit(b);
+        ArrayList<Integer> adminIdList=this.uMapper.getAdminId();
+        Random rand = new Random();
+        int x=rand.nextInt(adminIdList.size());
+        b.setAdmin_id(adminIdList.get(x));
+        this.bMapper.insertAudit(b);
+		return adminIdList.get(x);
 	}
 
 	@Override
-	public int updateAudit(int userId,int state) {
+	public int updateAudit(int AuditId,int state) {
 		// TODO Auto-generated method stub
-		this.bMapper.updateAudit(userId,new Date(),state);
+		this.bMapper.updateAudit(AuditId,new Date(),state);
 		
 		return 1;
 	}
@@ -38,6 +48,12 @@ public class AuditServiceImpl implements AuditService {
 	public ArrayList<BusinessAudit> getAuditByAdmin(int adminId) {
 		// TODO Auto-generated method stub
 		return this.bMapper.getBusinessAuditByAdminId(adminId);
+	}
+
+	@Override
+	public int getUserState(int userId) {
+		// TODO Auto-generated method stub
+		return this.uMapper.getUserState(userId);
 	}
 
 }

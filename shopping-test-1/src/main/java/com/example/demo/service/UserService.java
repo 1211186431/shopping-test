@@ -8,6 +8,8 @@ import com.example.demo.bean.UserInfo;
 public interface UserService {
 
 	public List<UserInfo> getAllUser();
+	
+	public List<UserInfo> getAllAdmin();
     
     public UserInfo getByName(String name);
     

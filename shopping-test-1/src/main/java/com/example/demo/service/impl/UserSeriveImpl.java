@@ -32,7 +32,7 @@ public class UserSeriveImpl implements UserService {
 	@Override
 	public String insertOne(UserInfo userInfo) {
 		// TODO Auto-generated method stub
-		if(this.UserMapper.getAllName().contains(userInfo.getName())) {
+		if(this.UserMapper.getAllName().contains(userInfo.getName())) {  //先查询所有的用户名
 			return "用户名已存在";
 		}
 		else {
@@ -43,6 +43,12 @@ public class UserSeriveImpl implements UserService {
 			return "创建成功";
 		}
 		
+	}
+
+	@Override
+	public List<UserInfo> getAllAdmin() {
+		// TODO Auto-generated method stub
+		return this.UserMapper.getAllAdmin();
 	}
 
 }

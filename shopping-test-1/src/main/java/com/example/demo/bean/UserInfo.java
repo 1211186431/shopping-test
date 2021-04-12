@@ -36,19 +36,21 @@ public class UserInfo implements UserDetails{
     private String phone;
     private String address;
     private int state;
+    private String role;
    
-	public UserInfo(String name, String password, String phone) {
+	public UserInfo(String name, String password, String phone,String role) {
 		super();
 		this.name = name;
 		this.password = password;
 		this.phone = phone;
+		this.role=role;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		List<SimpleGrantedAuthority> authorities =new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_user"));
+		authorities.add(new SimpleGrantedAuthority(this.role));
 		return authorities;
 	}
 
