@@ -7,8 +7,10 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.bean.SellerInfo;
 import com.example.demo.bean.audit.BusinessAudit;
 import com.example.demo.dao.auditMapper.BusinessMapper;
+import com.example.demo.dao.sellerMapper.SellerMapper;
 import com.example.demo.dao.userMapper.UserMapper;
 import com.example.demo.service.AuditService;
 @Service
@@ -18,6 +20,9 @@ public class AuditServiceImpl implements AuditService {
     
     @Autowired
     UserMapper uMapper;
+    
+    @Autowired
+    SellerMapper sMapper;
     
 	@Override
 	public int insertAudit(BusinessAudit b) {
@@ -34,7 +39,13 @@ public class AuditServiceImpl implements AuditService {
 	public int updateAudit(int AuditId,int state) {
 		// TODO Auto-generated method stub
 		this.bMapper.updateAudit(AuditId,new Date(),state);
-		
+		if(state==1) {
+			SellerInfo s=new SellerInfo();
+			int userId=this.bMapper.getUserId(AuditId);
+			s.setUser_id(userId);
+			this.sMapper.insertSellerInfo(s);
+			this.uMapper.updateUserRole("ROLR_admin", userId);
+		}
 		return 1;
 	}
 

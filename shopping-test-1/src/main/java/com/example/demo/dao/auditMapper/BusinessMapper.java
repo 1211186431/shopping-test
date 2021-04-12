@@ -17,6 +17,9 @@ public interface BusinessMapper extends BaseMapper<BusinessAudit>{
 	@Select("select * from business_audit where user_id=#{userId}")
      public ArrayList<BusinessAudit> getBusinessAuditByUserId(int userId); 
 	
+	@Select("select user_id from business_audit where id=#{auditId}")
+	public int getUserId(int auditId);
+	
 	@Select("select * from business_audit where admin_id=#{adminId}")
     public ArrayList<BusinessAudit> getBusinessAuditByAdminId(int adminId);
 	
@@ -25,5 +28,5 @@ public interface BusinessMapper extends BaseMapper<BusinessAudit>{
 	public int insertAudit(BusinessAudit businessAudit);
 	
 	 @Update("update business_audit set updateTime=#{updateTime},state=#{state} where id=#{id}")
-		public void updateAudit(int id,Date updateTime,int state);
+	public void updateAudit(int id,Date updateTime,int state);
 }

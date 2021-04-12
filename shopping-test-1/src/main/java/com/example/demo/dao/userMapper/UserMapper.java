@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.demo.bean.ShoppingInfo;
@@ -37,4 +38,7 @@ public interface UserMapper extends BaseMapper<UserInfo>{
     
     @Select("select state from user where id=#{userId}")
     public int getUserState(int userId);
+    
+    @Update("update user set role=#{role} where id=#{userId}")
+    public int updateUserRole(String role,int userId);
 }

@@ -9,8 +9,8 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
-import com.example.demo.bean.Chat;
-import com.example.demo.bean.Message;
+import com.example.demo.bean.chat.Chat;
+import com.example.demo.bean.chat.Message;
 
 @Controller
 public class GreetingController {

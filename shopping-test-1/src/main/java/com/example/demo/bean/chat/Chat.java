@@ -1,4 +1,4 @@
-package com.example.demo.bean;
+package com.example.demo.bean.chat;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.example.demo.bean;
+package com.example.demo.bean.chat;
 
 public class Message {
     private String name;
