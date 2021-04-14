@@ -24,4 +24,5 @@ public class Goods {
     private BigDecimal price;
     private String name;
     private String picture;
+    private String delivery;
 }

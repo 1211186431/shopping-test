@@ -19,4 +19,5 @@ public interface GoodsMapper extends BaseMapper<Goods>{
     
     @Select("select * from goods where id=#{goodsId}")
     public Goods getGoodsById(int goodsId);
+   
 }

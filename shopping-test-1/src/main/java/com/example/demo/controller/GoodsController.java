@@ -32,4 +32,6 @@ public class GoodsController {
 	public Goods getGoods(@RequestParam("goodsId") int goodsId) {
 		return this.goodsService.getGoodsById(goodsId);
 	}
+	
+	
 }
