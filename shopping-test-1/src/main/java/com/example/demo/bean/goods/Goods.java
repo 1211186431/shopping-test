@@ -1,6 +1,7 @@
 package com.example.demo.bean.goods;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -25,4 +26,5 @@ public class Goods {
     private String name;
     private String picture;
     private String delivery;
+    private ArrayList<GoodsType> goodstype;
 }

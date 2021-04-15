@@ -20,8 +20,7 @@ public class OrderController {
 	
     @PostMapping("/Order/set")
     public OrderDetail setOrder(@RequestBody OrderR orderR) {
-    	//int orderId=this.oService.insertOrder(orderR);
-		return this.oService.insertOrder(orderR);  //需要完善
+		return this.oService.insertOrder(orderR);  
     }
     
     @PostMapping("/Order/update")

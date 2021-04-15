@@ -35,7 +35,31 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public Goods getGoodsById(int goodsId) {
 		// TODO Auto-generated method stub
-		return this.gMapper.getGoodsById(goodsId);
+		Goods g=this.gMapper.getGoodsById(goodsId);
+		g.setGoodstype(this.gMapper.getGoodsType(goodsId));
+		return g;
+	}
+
+	@Override
+	public int insertGoods(Goods g) {
+		// TODO Auto-generated method stub
+		this.gMapper.insertGoods(g);
+		int goodsId=g.getId();
+		for(int i=0;i<g.getGoodstype().size();i++) {
+			this.gMapper.insertGoodsType(g.getGoodstype().get(i).getType_id(),goodsId);
+		}
+		return goodsId;
+	}
+
+	@Override
+	public void upDateGoods(Goods g) {
+		// TODO Auto-generated method stub
+		this.gMapper.upDateGoods(g);
+		this.gMapper.deleteGoodsType(g.getId());
+		int goodsId=g.getId();
+		for(int i=0;i<g.getGoodstype().size();i++) {
+			this.gMapper.insertGoodsType(g.getGoodstype().get(i).getType_id(),goodsId);
+		}
 	}
 
 }

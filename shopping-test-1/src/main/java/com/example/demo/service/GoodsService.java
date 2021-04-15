@@ -12,4 +12,8 @@ public interface GoodsService {
      public PageResult getAllGoodsShow(int pageNum, int pageSize);
      
      public Goods getGoodsById(int goodsId);
+     
+     public int insertGoods(Goods g);
+     
+     public void upDateGoods(Goods g);
 }

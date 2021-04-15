@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +32,18 @@ public class GoodsController {
 	
 	@GetMapping("/goods/getGoods")
 	public Goods getGoods(@RequestParam("goodsId") int goodsId) {
-		return this.goodsService.getGoodsById(goodsId);
+		Goods g=this.goodsService.getGoodsById(goodsId);
+		return g;
+	}
+	
+	@PostMapping("/goods/insertGoods")
+	public int insertGoods(@RequestBody Goods g) {
+		return this.goodsService.insertGoods(g);
+	}
+	
+	@PostMapping("/goods/upDateGoods")
+	public void upDateGoods(@RequestBody Goods g) {
+		this.goodsService.upDateGoods(g);
 	}
 	
 	
