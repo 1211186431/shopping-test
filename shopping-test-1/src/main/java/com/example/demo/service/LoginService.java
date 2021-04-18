@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.bean.UserInfo;
+import com.example.demo.bean.user.UserInfo;
 import com.example.demo.dao.userMapper.UserMapper;
 @Service
 public class LoginService implements UserDetailsService {

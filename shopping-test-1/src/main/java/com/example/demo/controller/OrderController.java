@@ -33,4 +33,9 @@ public class OrderController {
     public OrderDetail getOrderDetail(@RequestParam("orderNum") String orderNum){
     	return this.oService.getOrderByNum(orderNum);
     }
+    
+    @GetMapping("/Order/getUserOrder")
+    public ArrayList<OrderDetail> getUserOrder(@RequestParam("userId")int user_id){
+    	return this.oService.getUserOrder(user_id);
+    }
 }

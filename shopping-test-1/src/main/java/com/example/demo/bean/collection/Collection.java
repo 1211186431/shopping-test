@@ -18,4 +18,6 @@ public class Collection {
     private int user_id;
     private int goods_id;
     private Date createDate;
+    private BigDecimal price;
+    private String name;
 }

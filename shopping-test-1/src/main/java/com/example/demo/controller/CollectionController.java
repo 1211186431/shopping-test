@@ -24,11 +24,16 @@ public class CollectionController {
     }
     
     @PostMapping("/collection/insert")
-    public void insertCollection(@RequestParam("userId") int userId,@RequestParam("goodsId") int goodsId) {
+    public int insertCollection(@RequestParam("userId") int userId,@RequestParam("goodsId") int goodsId) {
     	Collection c=new Collection();
     	c.setCreateDate(new Date());
     	c.setGoods_id(goodsId);
     	c.setUser_id(userId);
-    	this.cService.insertCollection(c);
+    	return this.cService.insertCollection(c);
+    }
+    
+    @PostMapping("/collection/delete")
+    public void deleteCollection(@RequestParam("collId") int id) {
+    	this.cService.deleteCollection(id);
     }
 }

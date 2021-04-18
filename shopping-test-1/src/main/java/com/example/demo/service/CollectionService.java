@@ -7,5 +7,7 @@ import com.example.demo.bean.collection.Collection;
 public interface CollectionService {
      public ArrayList<Collection> getCollection(int userId);
      
-     public void insertCollection(Collection c);
+     public int insertCollection(Collection c);
+     
+     public void deleteCollection(int id);
 }

@@ -1,9 +1,10 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-
-import com.example.demo.bean.UserInfo;
+import com.example.demo.bean.user.UserAddress;
+import com.example.demo.bean.user.UserInfo;
 
 public interface UserService {
 
@@ -14,5 +15,13 @@ public interface UserService {
     public UserInfo getByName(String name);
     
     public String insertOne(UserInfo userInfo); 
+    
+    public UserInfo getUserInfo(int userId);
+    
+    public void UpdateUserInfo(String email,String location,String phone,int sex,int userId);
+    
+    public ArrayList<UserAddress> getUserAddress(int id);
+    
+    public int insertUserAddress(int userId,String phone,String address);
     
 }

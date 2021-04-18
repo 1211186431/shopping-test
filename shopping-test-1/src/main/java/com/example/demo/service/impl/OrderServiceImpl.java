@@ -47,4 +47,10 @@ public class OrderServiceImpl implements OrderService {
 		return this.oMapper.getOrderByNum(orderNum);
 	}
 
+	@Override
+	public ArrayList<OrderDetail> getUserOrder(int user_id) {
+		// TODO Auto-generated method stub
+		return this.oMapper.getUserOrder(user_id);
+	}
+
 }

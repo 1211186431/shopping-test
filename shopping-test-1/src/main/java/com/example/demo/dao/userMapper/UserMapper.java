@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.demo.bean.ShoppingInfo;
-import com.example.demo.bean.UserInfo;
+import com.example.demo.bean.user.UserInfo;
 
 
 @Mapper
@@ -41,4 +41,10 @@ public interface UserMapper extends BaseMapper<UserInfo>{
     
     @Update("update user set role=#{role} where id=#{userId}")
     public int updateUserRole(String role,int userId);
+    
+    @Select("select * from user where id=#{userId}")
+    public UserInfo getUserInfo(int userId);
+    
+    @Update("update user set email=#{email},location=#{location},phone=#{phone},sex=#{sex} where id=#{userId}")
+    public void upDateUserInfo(String email,String location,String phone,int sex,int userId);
 }

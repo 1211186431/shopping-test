@@ -11,4 +11,6 @@ public interface OrderService {
     public void updateOrder(String orderNum,int state);
     
     public OrderDetail getOrderByNum(String orderNum);
+    
+    public ArrayList<OrderDetail> getUserOrder(int user_id);
 }

@@ -26,4 +26,7 @@ public interface OrderMapper extends BaseMapper<OrderDetail>{
     @Insert("insert into goods_order(orderNumber,goodsId,num) "
     		+ "values(#{o},#{goodsId},#{num})")
     public void insertGoodsOrdet(String o,int goodsId,int num);
+    
+    @Select("select * from Myorder where user_id=#{user_id}")
+    public ArrayList<OrderDetail> getUserOrder(int user_id);
 }

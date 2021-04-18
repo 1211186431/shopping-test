@@ -1,4 +1,4 @@
-package com.example.demo.bean;
+package com.example.demo.bean.user;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -24,7 +24,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserInfo implements UserDetails{
-    private int id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int id;
     private String name;
     private String password;
     private String email;
@@ -34,7 +38,6 @@ public class UserInfo implements UserDetails{
     private double integral;
     private Date createDate;
     private String phone;
-    private String address;
     private int state;
     private String role;
    

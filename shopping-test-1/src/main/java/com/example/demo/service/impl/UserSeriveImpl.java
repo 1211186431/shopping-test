@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +9,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.bean.UserInfo;
+import com.example.demo.bean.user.UserAddress;
+import com.example.demo.bean.user.UserInfo;
 import com.example.demo.dao.mapper.InfoMapper;
+import com.example.demo.dao.userMapper.UserAddressMapper;
 import com.example.demo.dao.userMapper.UserMapper;
 import com.example.demo.service.UserService;
 @Service
 public class UserSeriveImpl implements UserService {
 	@Autowired
 	private UserMapper UserMapper; 
+	
+	@Autowired
+	private UserAddressMapper UAMapper;
 	
 	@Override
 	public List<UserInfo> getAllUser() {
@@ -49,6 +55,35 @@ public class UserSeriveImpl implements UserService {
 	public List<UserInfo> getAllAdmin() {
 		// TODO Auto-generated method stub
 		return this.UserMapper.getAllAdmin();
+	}
+
+	@Override
+	public UserInfo getUserInfo(int userId) {
+		// TODO Auto-generated method stub
+		return this.UserMapper.getUserInfo(userId);
+	}
+
+	@Override
+	public void UpdateUserInfo(String email, String location, String phone, int sex, int userId) {
+		// TODO Auto-generated method stub
+		this.UserMapper.upDateUserInfo(email, location, phone, sex, userId);
+	}
+
+	@Override
+	public ArrayList<UserAddress> getUserAddress(int id) {
+		// TODO Auto-generated method stub
+		return this.UAMapper.getUserAddress(id);
+	}
+
+	@Override
+	public int insertUserAddress(int userId, String phone, String address) {
+		// TODO Auto-generated method stub
+		UserAddress u=new UserAddress();
+		u.setAddress(address);
+		u.setPhone(phone);
+		u.setUserId(userId);
+		this.UAMapper.insertAddress(u);
+		return u.getId();
 	}
 
 }

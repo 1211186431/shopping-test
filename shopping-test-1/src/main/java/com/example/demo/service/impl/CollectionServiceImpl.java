@@ -21,9 +21,23 @@ public class CollectionServiceImpl implements CollectionService {
 	}
 
 	@Override
-	public void insertCollection(Collection c) {
+	public int insertCollection(Collection c) {
 		// TODO Auto-generated method stub
-        this.cMapper.insertCollection(c);
+		ArrayList<Integer> goodsIds=this.cMapper.getUserCollGoods(c.getUser_id());
+		if(goodsIds.contains(c.getGoods_id())) {
+			return 0;
+		}
+		else {
+			this.cMapper.insertCollection(c);
+			return 1;
+		}
+        
+	}
+
+	@Override
+	public void deleteCollection(int id) {
+		// TODO Auto-generated method stub
+		this.cMapper.deleteCollGoods(id);
 	}
 
 }
