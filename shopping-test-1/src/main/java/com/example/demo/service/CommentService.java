@@ -10,4 +10,8 @@ public interface CommentService {
       public ArrayList<UserComment> getCommentByUser(int userId);
       
       public ArrayList<UserComment> getCommentByAdmin(int adminId);
+      
+      public UserComment getGoodsComment(int goodsId,String orderNum);
+      
+      public void upDateComment(int id,double grade,String content);
 } 

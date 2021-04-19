@@ -19,6 +19,7 @@ public class OrderR {
 	  private String orderNumber;
       private int userId;
       private BigDecimal Allprice;
+      private Date purchasingDate;
       private String receiver;
       private String payment;
       private int state;

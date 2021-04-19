@@ -31,7 +31,6 @@ public class OrderServiceImpl implements OrderService {
 		for(int i=0;i<o.getGoodsList().size();i++) {
 			this.oMapper.insertGoodsOrdet(o.getOrderNumber(), o.getGoodsList().get(i).getGoodsId(), o.getGoodsList().get(i).getGoodsNum());
 		}
-		
 		return orderD;
 	}
 
@@ -42,15 +41,26 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderDetail getOrderByNum(String orderNum) {
+	public OrderR getOrderByNum(String orderNum) {
 		// TODO Auto-generated method stub
-		return this.oMapper.getOrderByNum(orderNum);
+		OrderDetail od=this.oMapper.getOrderByNum(orderNum);
+		ArrayList<GoodsUtil> a=this.oMapper.getGoodsUtil(orderNum);
+		OrderUtil ou=new OrderUtil();
+		return ou.getOrderR(od, a);
 	}
 
 	@Override
-	public ArrayList<OrderDetail> getUserOrder(int user_id) {
+	public ArrayList<OrderR> getUserOrder(int user_id) {
 		// TODO Auto-generated method stub
-		return this.oMapper.getUserOrder(user_id);
+		ArrayList<OrderDetail> a=this.oMapper.getUserOrder(user_id);
+		ArrayList<OrderR> or=new ArrayList<OrderR>();
+		OrderUtil ou=new OrderUtil();
+		for(int i=0;i<a.size();i++) {
+			OrderDetail o=a.get(i);
+			ArrayList<GoodsUtil> g=this.oMapper.getGoodsUtil(o.getOrderNumber());
+			or.add(ou.getOrderR(o, g));
+		}
+		return or;
 	}
 
 }

@@ -16,9 +16,10 @@ import lombok.NoArgsConstructor;
 public class UserComment {
      private int id;
      private int user_id;
-     private int seller_id;
+     private int goods_id;
      private String content;
      private Date createDate;
      private int state;
      private double grade;
+     private String orderNum;
 }
