@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.PageResult;
 import com.example.demo.bean.goods.Goods;
-import com.example.demo.bean.goods.GoodsShow;
+import com.example.demo.bean.goods.GoodsPic;
+import com.example.demo.bean.goods.GoodsType;
 import com.example.demo.dao.goodsMapper.GoodsMapper;
+import com.example.demo.dao.picMapper.GoodsPicMapper;
 import com.example.demo.helper.PageUtils;
 import com.example.demo.service.GoodsService;
 import com.github.pagehelper.PageHelper;
@@ -17,6 +19,9 @@ import com.github.pagehelper.PageInfo;
 public class GoodsServiceImpl implements GoodsService {
     @Autowired 
     private GoodsMapper gMapper;
+    
+    @Autowired 
+    private GoodsPicMapper gPMapper;
     
 	@Override
 	public ArrayList<Goods> getAllGoods() {
@@ -48,7 +53,7 @@ public class GoodsServiceImpl implements GoodsService {
 		for(int i=0;i<g.getGoodstype().size();i++) {
 			this.gMapper.insertGoodsType(g.getGoodstype().get(i).getType_id(),goodsId);
 		}
-		return goodsId;
+		return g.getId();
 	}
 
 	@Override
@@ -60,6 +65,42 @@ public class GoodsServiceImpl implements GoodsService {
 		for(int i=0;i<g.getGoodstype().size();i++) {
 			this.gMapper.insertGoodsType(g.getGoodstype().get(i).getType_id(),goodsId);
 		}
+	}
+
+	@Override
+	public ArrayList<Goods> getGoodsBySeller(int sellerId) {
+		// TODO Auto-generated method stub
+		return this.gMapper.getGoodsBySeller(sellerId);
+	}
+
+	@Override
+	public ArrayList<GoodsType> getAllGoodsType() {
+		// TODO Auto-generated method stub
+		return this.gMapper.getAllGoodsType();
+	}
+
+	@Override
+	public int insertGoodsPic(GoodsPic g) {
+		// TODO Auto-generated method stub
+		return this.gPMapper.insertPic(g);
+	}
+
+	@Override
+	public void upDateGoodsPic(String pic,int goodsId) {
+		// TODO Auto-generated method stub
+		this.gMapper.upDateGoodsPic(pic, goodsId);
+	}
+
+	@Override
+	public ArrayList<GoodsPic> getGoodsPic(int goodsId) {
+		// TODO Auto-generated method stub
+		return this.gPMapper.getGoodsPic(goodsId);
+	}
+
+	@Override
+	public void deleteGoodsPic(int id) {
+		// TODO Auto-generated method stub
+		this.gPMapper.deleteGoodsPic(id);
 	}
 
 }

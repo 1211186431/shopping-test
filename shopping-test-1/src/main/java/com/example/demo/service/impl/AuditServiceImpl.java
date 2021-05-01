@@ -7,9 +7,14 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.bean.SellerInfo;
 import com.example.demo.bean.audit.BusinessAudit;
+import com.example.demo.bean.comment.UserComment;
+import com.example.demo.bean.goods.Goods;
+import com.example.demo.bean.seller.SellerInfo;
+import com.example.demo.bean.user.UserInfo;
 import com.example.demo.dao.auditMapper.BusinessMapper;
+import com.example.demo.dao.commentMapper.CommentMapper;
+import com.example.demo.dao.goodsMapper.GoodsMapper;
 import com.example.demo.dao.sellerMapper.SellerMapper;
 import com.example.demo.dao.userMapper.UserMapper;
 import com.example.demo.service.AuditService;
@@ -23,6 +28,12 @@ public class AuditServiceImpl implements AuditService {
     
     @Autowired
     SellerMapper sMapper;
+    
+    @Autowired
+    GoodsMapper gMapper;
+    
+    @Autowired
+    CommentMapper cMapper;
     
 	@Override
 	public int insertAudit(BusinessAudit b) {
@@ -42,7 +53,7 @@ public class AuditServiceImpl implements AuditService {
 		if(state==1) {
 			SellerInfo s=new SellerInfo();
 			int userId=this.bMapper.getUserId(AuditId);
-			s.setUser_id(userId);
+			s.setUserId(userId);
 			this.sMapper.insertSellerInfo(s);
 			this.uMapper.updateUserRole("ROLR_admin", userId);
 		}
@@ -66,5 +77,43 @@ public class AuditServiceImpl implements AuditService {
 		// TODO Auto-generated method stub
 		return this.uMapper.getUserState(userId);
 	}
+
+	@Override
+	public ArrayList<Goods> getGoodsByAdmin() {
+		// TODO Auto-generated method stub
+		return this.gMapper.getOffGoods();
+	}
+
+	@Override
+	public ArrayList<UserComment> getAllComment() {
+		// TODO Auto-generated method stub
+		return this.cMapper.getAllUserComment();
+	}
+
+	@Override
+	public ArrayList<UserInfo> getAllUser() {
+		// TODO Auto-generated method stub
+		return this.uMapper.getAllUser();
+	}
+
+	@Override
+	public void updateGoodsByAdmin(int state,int goodsId) {
+		// TODO Auto-generated method stub
+		this.gMapper.upDateGoodsState(state,goodsId);
+	}
+
+	@Override
+	public void updateAllComment(int state, int commentId) {
+		// TODO Auto-generated method stub
+		this.cMapper.upDateCommentState(state, commentId);
+	}
+
+	@Override
+	public void updateAllUser(int state, int userId) {
+		// TODO Auto-generated method stub
+		this.uMapper.updateUserState(state, userId);
+	}
+
+
 
 }

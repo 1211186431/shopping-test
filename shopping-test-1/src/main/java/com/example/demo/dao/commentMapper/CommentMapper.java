@@ -13,11 +13,14 @@ import com.example.demo.bean.comment.UserComment;
 
 @Mapper
 public interface CommentMapper extends BaseMapper<UserComment>{
+	  @Select("select * from comment")
+      public ArrayList<UserComment> getAllUserComment();
+	
       @Select("select * from comment where user_id=#{user_id}")
       public ArrayList<UserComment> getUserCommentByUser(int user_id);
      
-      @Select("select * from comment where seller_id=#{seller_id}")
-      public ArrayList<UserComment> getUserCommentBySeller(int seller_id);
+      @Select("select * from comment where goods_id=#{goods_id}")
+      public ArrayList<UserComment> getUserCommentByGoods(int goods_id);
       
       @Insert("insert into comment(user_id,goods_id,content,createDate,state,grade,orderNum) "
       		+ "values(#{user_id},#{goods_id},#{content},#{createDate},#{state},#{grade},#{orderNum})")
@@ -29,4 +32,7 @@ public interface CommentMapper extends BaseMapper<UserComment>{
       
       @Update("update comment set grade=#{grade},content=#{content} where id=#{id}")
       public void upDateComment(int id,double grade,String content);
+      
+      @Update("update comment set state=#{state} where id=#{id}")
+      public void upDateCommentState(int state,int id);
 }

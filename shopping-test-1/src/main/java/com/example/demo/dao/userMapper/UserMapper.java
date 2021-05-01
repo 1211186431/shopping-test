@@ -1,5 +1,6 @@
 package com.example.demo.dao.userMapper;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +18,10 @@ import com.example.demo.bean.user.UserInfo;
 @Mapper
 public interface UserMapper extends BaseMapper<UserInfo>{
 	@Select("select * from user where role=\"ROLE_user\"")
-	public List<UserInfo> getAllUser();
+	public ArrayList<UserInfo> getAllUser();
     
 	@Select("select * from user where role=\"ROLE_admin\"")
-	public List<UserInfo> getAllAdmin();
+	public ArrayList<UserInfo> getAllAdmin();
 	
 	@Select("select * from user where name = #{name}")
     public UserInfo getByName(String name);
@@ -41,6 +42,12 @@ public interface UserMapper extends BaseMapper<UserInfo>{
     
     @Update("update user set role=#{role} where id=#{userId}")
     public int updateUserRole(String role,int userId);
+    
+    @Update("update user set state=#{state} where id=#{userId}")
+    public int updateUserState(int state,int userId);
+    
+    @Update("update user set money=#{b} where id=#{userId}")
+    public int updateUserMoney(BigDecimal b,int userId);
     
     @Select("select * from user where id=#{userId}")
     public UserInfo getUserInfo(int userId);

@@ -44,4 +44,10 @@ public class CommentServiceImpl implements CommentService {
 		this.cMapper.upDateComment(id, grade, content);
 	}
 
+	@Override
+	public ArrayList<UserComment> getCommentByGoods(int goodsId) {
+		// TODO Auto-generated method stub
+		return this.cMapper.getUserCommentByGoods(goodsId);
+	}
+
 }

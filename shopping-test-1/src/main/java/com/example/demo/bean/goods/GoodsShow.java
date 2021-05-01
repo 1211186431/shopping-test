@@ -2,7 +2,7 @@ package com.example.demo.bean.goods;
 
 import java.math.BigDecimal;
 
-import com.example.demo.bean.SellerInfo;
+import com.example.demo.bean.seller.SellerInfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

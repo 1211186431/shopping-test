@@ -21,6 +21,11 @@ public class CommentController {
 	public ArrayList<UserComment> getCommentByUser(@RequestParam("userId") int userId) {
 		return this.cService.getCommentByUser(userId);
 	}
+	
+	@GetMapping("/comment/getByGoods")
+	public ArrayList<UserComment> getCommentByGoods(@RequestParam("goodsId") int goodsId) {
+		return this.cService.getCommentByGoods(goodsId);
+	}
 
 	@GetMapping("/comment/getByAdmin")
 	public ArrayList<UserComment> getCommentByAdmin(@RequestParam("adminId") int adminId) {

@@ -25,4 +25,5 @@ public class OrderUtil {
     			.purchasingDate(o.getPurchasingDate()).goodsList(g).build();
     	return or;
     }
+    
 }
