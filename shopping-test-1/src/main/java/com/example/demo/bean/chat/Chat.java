@@ -12,7 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Chat {
-	private String to;
-	private String from;
-	private String content;
+	private int chatId;
+	private String toUser;
+	private String fromUser;
+	private String userContent;
+	private Date crateDate;
 }
