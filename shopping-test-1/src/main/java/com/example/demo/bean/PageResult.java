@@ -3,7 +3,12 @@ package com.example.demo.bean;
 import java.util.List;
 
 import lombok.Data;
-
+/**
+ * 分页
+ * @author dy-xx
+ *
+ * @param <T>
+ */
 @Data
 public class PageResult<T> {
     /**

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.user.UserAddress;
 import com.example.demo.bean.user.UserInfo;
-import com.example.demo.dao.mapper.InfoMapper;
 import com.example.demo.dao.userMapper.UserAddressMapper;
 import com.example.demo.dao.userMapper.UserMapper;
 import com.example.demo.service.UserService;
@@ -84,6 +83,12 @@ public class UserSeriveImpl implements UserService {
 		u.setUserId(userId);
 		this.UAMapper.insertAddress(u);
 		return u.getId();
+	}
+
+	@Override
+	public List<UserInfo> getAll() {
+		// TODO Auto-generated method stub
+		return this.UserMapper.getAll();
 	}
 
 }

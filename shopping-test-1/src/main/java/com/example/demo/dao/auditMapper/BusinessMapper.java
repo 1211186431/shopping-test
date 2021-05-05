@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.demo.bean.ShoppingInfo;
 import com.example.demo.bean.audit.BusinessAudit;
 
 @Mapper

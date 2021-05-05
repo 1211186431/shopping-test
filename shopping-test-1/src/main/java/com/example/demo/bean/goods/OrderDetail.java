@@ -8,6 +8,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 订单详细信息（数据库存储）
+ * @author dy-xx
+ *
+ */
 @Data
 @Builder
 @AllArgsConstructor

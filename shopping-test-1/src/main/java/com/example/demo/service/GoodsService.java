@@ -30,4 +30,6 @@ public interface GoodsService {
      public ArrayList<GoodsPic> getGoodsPic(int goodsId);
      
      public void deleteGoodsPic(int id);
+     
+     public PageResult getGoodsShowByName(int pageNum, int pageSize,String name);
 }

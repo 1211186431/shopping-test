@@ -7,7 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * 管理员审核商家类
+ * @author dy-xx
+ *
+ */
 @Data
 @Builder
 @AllArgsConstructor

@@ -10,7 +10,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * 前端订单传送的格式
+ * @author dy-xx
+ *
+ */
 @Data
 @Builder
 @AllArgsConstructor

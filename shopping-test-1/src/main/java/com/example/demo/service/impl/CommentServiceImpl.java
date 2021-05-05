@@ -27,12 +27,6 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public ArrayList<UserComment> getCommentByAdmin(int adminId) {
-		// TODO Auto-generated method stub
-		return this.getCommentByAdmin(adminId);
-	}
-
-	@Override
 	public UserComment getGoodsComment(int goodsId, String orderNum) {
 		// TODO Auto-generated method stub
 		return this.cMapper.getGoodsComment(goodsId, orderNum);

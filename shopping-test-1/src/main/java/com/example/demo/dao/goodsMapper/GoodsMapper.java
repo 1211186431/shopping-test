@@ -32,6 +32,9 @@ public interface GoodsMapper extends BaseMapper<Goods>{
     @Select("select id,name,price,picture from goods where state=1") 
     public ArrayList<GoodsShow> getGoodsShow();
     
+    @Select("select id,name,price,picture from goods where state=1 && name like CONCAT('%',#{name},'%')") 
+    public ArrayList<GoodsShow> getGoodsShowByName(String name);
+    
     @Select("select * from goods where id=#{goodsId}")
     public Goods getGoodsById(int goodsId);
     

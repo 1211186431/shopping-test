@@ -2,10 +2,16 @@ package com.example.demo.bean.seller;
 
 import java.util.Date;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+/**
+ * 商家查看订单（多表连接结果）
+ * @author dy-xx
+ *
+ */
 @Data
 @Builder
 @AllArgsConstructor

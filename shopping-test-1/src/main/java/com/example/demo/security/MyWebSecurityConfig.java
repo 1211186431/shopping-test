@@ -38,7 +38,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	LoginService loginSerive;
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(10);
@@ -51,9 +51,9 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/getAll").hasRole("admin").and().formLogin().loginPage("http://localhost:8080/login")
-				.loginProcessingUrl("/login").usernameParameter("name").passwordParameter("password")
-				.successHandler(new AuthenticationSuccessHandler() {
+		http.authorizeRequests().antMatchers("/Audit/*").hasRole("admin").antMatchers("/user/*").authenticated().and().formLogin()
+				.loginPage("http://localhost:8080/login").loginProcessingUrl("/login").usernameParameter("name")
+				.passwordParameter("password").successHandler(new AuthenticationSuccessHandler() {
 
 					@Override
 					public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -79,25 +79,20 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 						// TODO Auto-generated method stub
 						response.setContentType("application/json;charset=utf-8");
 						PrintWriter out = response.getWriter();
-						//response.setStatus(401);   //如果不注释，前端报错，没有信息
+						// response.setStatus(401); //如果不注释，前端报错，没有信息
 						Map<String, Object> map = new HashMap<>();
 						map.put("status", 401);
-						if(exception instanceof LockedException) {
+						if (exception instanceof LockedException) {
 							map.put("msg", "账户被锁定，登录失败");
-						}
-						else if(exception instanceof BadCredentialsException) {
+						} else if (exception instanceof BadCredentialsException) {
 							map.put("msg", "账号或密码错误");
-						}
-						else if(exception instanceof DisabledException) {
+						} else if (exception instanceof DisabledException) {
 							map.put("msg", "账户被禁用");
-						}
-						else if(exception instanceof AccountExpiredException) {
+						} else if (exception instanceof AccountExpiredException) {
 							map.put("msg", "账号已过期");
-						}
-						else if(exception instanceof CredentialsExpiredException) {
+						} else if (exception instanceof CredentialsExpiredException) {
 							map.put("msg", "密码已过期");
-						}
-						else {
+						} else {
 							map.put("msg", "登录失败");
 						}
 						ObjectMapper om = new ObjectMapper();
@@ -106,17 +101,16 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 						out.close();
 					}
 
-				}).
-				and().logout().logoutUrl("/logout").clearAuthentication(true).invalidateHttpSession(true).
-				addLogoutHandler(new LogoutHandler() {
+				}).and().logout().logoutUrl("/logout").clearAuthentication(true).invalidateHttpSession(true)
+				.addLogoutHandler(new LogoutHandler() {
 
 					@Override
 					public void logout(HttpServletRequest request, HttpServletResponse response,
 							Authentication authentication) {
 						// TODO Auto-generated method stub
-						
+
 					}
-					
+
 				}).logoutSuccessHandler(new LogoutSuccessHandler() {
 
 					@Override
@@ -132,8 +126,7 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 						out.flush();
 						out.close();
 					}
-					
-				})
-				.permitAll().and().csrf().disable();
+
+				}).permitAll().and().csrf().disable();
 	}
 }

@@ -103,4 +103,12 @@ public class GoodsServiceImpl implements GoodsService {
 		this.gPMapper.deleteGoodsPic(id);
 	}
 
+	@Override
+	public PageResult getGoodsShowByName(int pageNum, int pageSize, String name) {
+		// TODO Auto-generated method stub
+		PageHelper.startPage(pageNum, pageSize);
+		PageInfo pageInfos=new PageInfo<>(this.gMapper.getGoodsShowByName(name));
+		return PageUtils.getPageResult(pageInfos);
+	}
+
 }

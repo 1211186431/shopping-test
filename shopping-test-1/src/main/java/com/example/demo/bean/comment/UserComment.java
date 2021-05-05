@@ -1,14 +1,15 @@
 package com.example.demo.bean.comment;
 
 import java.util.Date;
-
-import com.example.demo.bean.seller.SellerInfo;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * 用户评论
+ * @author dy-xx
+ *
+ */
 @Data
 @Builder
 @AllArgsConstructor

@@ -11,8 +11,6 @@ public interface CommentService {
       
       public ArrayList<UserComment> getCommentByGoods(int goodsId);
       
-      public ArrayList<UserComment> getCommentByAdmin(int adminId);
-      
       public UserComment getGoodsComment(int goodsId,String orderNum);
       
       public void upDateComment(int id,double grade,String content);

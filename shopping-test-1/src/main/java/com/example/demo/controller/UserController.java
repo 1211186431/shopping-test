@@ -8,29 +8,40 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.bean.user.UserAddress;
 import com.example.demo.bean.user.UserInfo;
 import com.example.demo.service.UserService;
-import com.example.demo.service.impl.UserSeriveImpl;
 
-import lombok.extern.slf4j.Slf4j;
-
+/**
+ * 用户信息接口
+ * @author dy-xx
+ *
+ */
 @RestController
-@Slf4j
 public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/user/getAll")
+	/**
+	 * 获取所有的用户 的信息
+	 * @return
+	 */
+	@GetMapping("/getAll")
 	public List<UserInfo> getAll(){
 		return this.userService.getAllUser();
 	}
 	
-	@PostMapping("/user/register")
+	/**
+	 * 注册，必填项
+	 * @param name   
+	 * @param password
+	 * @param phone
+	 * @return
+	 */
+	@PostMapping("/register")
 	public Map<String,String> register(@RequestParam("name") String name,@RequestParam("password") String password,@RequestParam("phone") String phone){
 		UserInfo userInfo=new UserInfo(name,password,phone,"ROLE_user");
 		
@@ -46,11 +57,25 @@ public class UserController {
 		return map;
 	}
 	
+	/**
+	 * 获取用户信息
+	 * @param userId  用户id
+	 * @return
+	 */
 	@GetMapping("/user/getUserInfo")
 	public UserInfo getUserInfo(@RequestParam("userId") int userId) {
 		return this.userService.getUserInfo(userId);
 	}
 	
+	/**
+	 * 更新用户信息
+	 * @param email
+	 * @param location
+	 * @param phone
+	 * @param sex
+	 * @param userId
+	 * @return
+	 */
 	@PostMapping("/user/UpDateInfo")
 	public String UpdateUserInfo(@RequestParam("email")String email,
 			@RequestParam("location")String location,@RequestParam("phone")String phone,
@@ -59,15 +84,36 @@ public class UserController {
 		return "1";
 	}
 	
+	/**
+	 * 获取用户住址
+	 * @param userId  用户住址
+	 * @return 用户住址列表
+	 */
 	@GetMapping("/user/getUserAddress")
 	public ArrayList<UserAddress> getUserAddress(@RequestParam("userId") int userId) {
 		return this.userService.getUserAddress(userId);
 	}
 	
+	/**
+	 * 插入用户住址
+	 * @param address
+	 * @param phone
+	 * @param userId
+	 * @return  住址id
+	 */
 	@PostMapping("/user/insertAddress")
 	public int insertAddress(@RequestParam("address")String address,
 			@RequestParam("phone")String phone,@RequestParam("userId")int userId) {
 		return this.userService.insertUserAddress(userId, phone, address);
 	}
 	
+	/**
+	 * 获取所有用户+管理员 测试用
+	 * @return
+	 */
+	@GetMapping("/user/getAll2")
+	public List<UserInfo> getAllPeople() {
+		return this.userService.getAll();
+	}
+   
 }

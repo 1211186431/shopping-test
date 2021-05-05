@@ -1,13 +1,15 @@
 package com.example.demo.bean.user;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 用户收货地址
+ * @author dy-xx
+ *
+ */
 @Data
 @Builder
 @AllArgsConstructor

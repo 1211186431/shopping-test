@@ -1,14 +1,16 @@
 package com.example.demo.bean.goods;
 
 import java.math.BigDecimal;
-
-import com.example.demo.bean.seller.SellerInfo;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 向前端传送的商品展示信息
+ * @author dy-xx
+ *
+ */
 @Data
 @Builder
 @AllArgsConstructor

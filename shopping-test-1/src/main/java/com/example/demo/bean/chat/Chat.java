@@ -6,7 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * 聊天信息类
+ * @author dy-xx
+ *
+ */
 @Data
 @Builder
 @AllArgsConstructor

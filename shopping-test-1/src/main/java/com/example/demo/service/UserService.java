@@ -7,6 +7,7 @@ import com.example.demo.bean.user.UserAddress;
 import com.example.demo.bean.user.UserInfo;
 
 public interface UserService {
+	public List<UserInfo> getAll();
 
 	public List<UserInfo> getAllUser();
 	

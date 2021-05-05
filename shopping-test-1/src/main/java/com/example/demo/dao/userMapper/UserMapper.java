@@ -11,12 +11,14 @@ import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.demo.bean.ShoppingInfo;
 import com.example.demo.bean.user.UserInfo;
 
 
 @Mapper
 public interface UserMapper extends BaseMapper<UserInfo>{
+	@Select("select * from user")
+	public ArrayList<UserInfo> getAll();
+	
 	@Select("select * from user where role=\"ROLE_user\"")
 	public ArrayList<UserInfo> getAllUser();
     
