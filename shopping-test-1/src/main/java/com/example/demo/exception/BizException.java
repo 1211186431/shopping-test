@@ -1,5 +1,9 @@
 package com.example.demo.exception;
-
+/**
+ * 自定义错误类
+ * @author dy-xx
+ *
+ */
 public class BizException extends RuntimeException {
 	private static final long serialVersionUID = -7293520006679551853L;
 	

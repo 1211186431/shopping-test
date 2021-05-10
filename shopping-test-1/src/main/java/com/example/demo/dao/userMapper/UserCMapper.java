@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.demo.bean.collection.Collection;
@@ -17,6 +18,7 @@ public interface UserCMapper extends BaseMapper<Collection>{
     
     @Insert("insert into Coll(user_id,goods_id,createDate)"
     		+ " values(#{user_id},#{goods_id},#{createDate})")
+    @SelectKey(statement ="select last_insert_id()",keyProperty="id",before=false,resultType=int.class)
     public void insertCollection(Collection c);
     
     @Select("select goods_id from coll where user_id= #{userId}")

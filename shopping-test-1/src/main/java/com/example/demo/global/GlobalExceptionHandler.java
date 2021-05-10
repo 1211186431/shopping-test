@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.example.demo.exception.BizException;
 
@@ -36,6 +35,11 @@ public class GlobalExceptionHandler {
 //		return new ResponseEntity<>("订单操作异常，请检查后重试! (" + e.getMessage() + ")", HttpStatus.OK);
 //	} 
 	
+	/**
+	 * 空指针错误异常处理
+	 * @param e
+	 * @return 返回json数据
+	 */
  	@ExceptionHandler(NullPointerException.class)
 	public ResponseEntity<Map<String,String>> handleInteralError(Exception e) {
 		log.info("catch exception:" + e.getMessage() );
@@ -45,6 +49,11 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	} 
  	
+ 	/**
+ 	 * 数据库错误异常
+ 	 * @param e
+ 	 * @return
+ 	 */
  	@ExceptionHandler(BadSqlGrammarException.class)
 	public ResponseEntity<String> handleSQLError(Exception e) {
 		log.info("catch exception:" + e.getMessage() );

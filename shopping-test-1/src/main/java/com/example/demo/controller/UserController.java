@@ -5,6 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.quartz.JobBuilder;
+import org.quartz.JobDetail;
+import org.quartz.JobKey;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.bean.user.UserAddress;
 import com.example.demo.bean.user.UserInfo;
+import com.example.demo.orderJob.MyFirstJob;
+import com.example.demo.orderJob.QuartzConfig;
 import com.example.demo.service.UserService;
+
 
 /**
  * 用户信息接口
@@ -25,6 +36,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	QuartzConfig q;
 	/**
 	 * 获取所有的用户 的信息
 	 * @return
@@ -110,9 +123,13 @@ public class UserController {
 	/**
 	 * 获取所有用户+管理员 测试用
 	 * @return
+	 * @throws SchedulerException 
 	 */
 	@GetMapping("/user/getAll2")
-	public List<UserInfo> getAllPeople() {
+	public List<UserInfo> getAllPeople() throws SchedulerException {
+	   Map<String,Object> params=new HashMap<String,Object>();
+	   params.put("name", "123");
+	   q.task(new MyFirstJob(), params,"111");
 		return this.userService.getAll();
 	}
    

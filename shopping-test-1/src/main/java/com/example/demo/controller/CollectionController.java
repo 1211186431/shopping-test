@@ -43,7 +43,8 @@ public class CollectionController {
     	c.setCreateDate(new Date());
     	c.setGoods_id(goodsId);
     	c.setUser_id(userId);
-    	return this.cService.insertCollection(c);
+    	this.cService.insertCollection(c);
+    	return c.getId();
     }
     
     /**
