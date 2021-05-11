@@ -46,7 +46,7 @@ public interface GoodsMapper extends BaseMapper<Goods>{
      * 获取所有商品的展示信息
      * @return
      */
-    @Select("select id,name,price,picture from goods where state=1") 
+    @Select("select id,name,price,picture,user_id from goods where state=1") 
     public ArrayList<GoodsShow> getGoodsShow();
     
     /**

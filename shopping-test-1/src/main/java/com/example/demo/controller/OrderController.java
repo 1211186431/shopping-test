@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.ArrayList;
 
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,9 +27,10 @@ public class OrderController {
 	 * 生成订单
 	 * @param orderR 前端传送的订单信息
 	 * @return
+	 * @throws SchedulerException 
 	 */
     @PostMapping("/Order/set")
-    public OrderDetail setOrder(@RequestBody OrderR orderR) {
+    public OrderDetail setOrder(@RequestBody OrderR orderR) throws SchedulerException {
 		return this.oService.insertOrder(orderR);  
     }
     

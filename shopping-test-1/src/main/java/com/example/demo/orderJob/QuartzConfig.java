@@ -1,5 +1,6 @@
 package com.example.demo.orderJob;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.quartz.Job;
@@ -39,7 +40,7 @@ public class QuartzConfig {
         Trigger trigger = TriggerBuilder.newTrigger()
                 .withIdentity(key)
                 // 执行时间
-                .startNow()
+                .startAt(new Date(System.currentTimeMillis() + 1000*60*5))
                 .build();
         scheduler.scheduleJob(jobDetail , trigger);
 	}

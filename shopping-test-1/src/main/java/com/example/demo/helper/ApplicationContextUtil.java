@@ -20,5 +20,6 @@ public class ApplicationContextUtil implements ApplicationContextAware{
     public static Object getBean(String BeanName){
         return applicationContext.getBean(BeanName);
     }
+   
 }
 

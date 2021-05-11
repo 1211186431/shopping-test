@@ -52,15 +52,19 @@ public interface OrderMapper extends BaseMapper<OrderDetail>{
      * @param goodsId
      * @param num
      */
-    @Insert("insert into goods_order(orderNumber,goodsId,goodsNum) "
-    		+ "values(#{o},#{goodsId},#{num})")
-    public void insertGoodsOrdet(String o,int goodsId,int num);
+    @Insert("insert into goods_order(orderNumber,goodsId,goodsNum,state) "
+    		+ "values(#{o},#{goodsId},#{num},#{state})")
+    public void insertGoodsOrdet(String o,int goodsId,int num,int state);
+    
+    
+    @Update("update goods_order set state=#{state} where orderNumber=#{o}")
+    public void upDateGoodsOrdet(String o,int state);
     
     /**
      * 订单信息辅助
      * @param o
      * @return
      */
-    @Select("select goodsId,goodsNum from goods_order where orderNumber=#{o}")
+    @Select("select goodsId,goodsNum,state from goods_order where orderNumber=#{o}")
     public ArrayList<GoodsUtil> getGoodsUtil(String o);
 }

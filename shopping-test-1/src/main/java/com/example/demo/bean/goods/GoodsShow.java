@@ -20,4 +20,5 @@ public class GoodsShow {
     private BigDecimal price;
     private String name;
     private String picture;
+    private int user_id;
 }

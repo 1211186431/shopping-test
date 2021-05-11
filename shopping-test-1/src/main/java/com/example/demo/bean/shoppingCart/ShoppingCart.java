@@ -1,14 +1,12 @@
-package com.example.demo.helper;
-
-
-
+package com.example.demo.bean.shoppingCart;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 /**
- * 订单辅助类
+ * 购物车类
  * @author dy-xx
  *
  */
@@ -16,8 +14,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GoodsUtil {
+public class ShoppingCart {
+   private int id;
+   private int userId;
    private int goodsId;
    private int goodsNum;
-   private int state;
 }

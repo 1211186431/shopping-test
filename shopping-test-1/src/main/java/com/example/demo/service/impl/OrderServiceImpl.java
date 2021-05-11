@@ -3,7 +3,10 @@ package com.example.demo.service.impl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,8 @@ import com.example.demo.dao.orderMapper.OrderMapper;
 import com.example.demo.dao.userMapper.UserMapper;
 import com.example.demo.helper.GoodsUtil;
 import com.example.demo.helper.OrderUtil;
+import com.example.demo.orderJob.MyFirstJob;
+import com.example.demo.orderJob.QuartzConfig;
 import com.example.demo.service.OrderService;
 
 @Service
@@ -28,9 +33,12 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	UserMapper uMapper;
+	
+	@Autowired
+	QuartzConfig quartz;
 
 	@Override
-	public OrderDetail insertOrder(OrderR o) {
+	public OrderDetail insertOrder(OrderR o) throws SchedulerException {
 		// TODO Auto-generated method stub
 		UserInfo userInfo = this.uMapper.getUserInfo(o.getUserId());
 		BigDecimal newMoney = userInfo.getMoney().subtract(o.getAllprice());
@@ -38,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
 		// 更新用户金额
 		OrderUtil ou = new OrderUtil();
 		OrderDetail orderD = ou.getOrderD(o);
-		this.oMapper.insertOrder(orderD);
+		this.oMapper.insertOrder(orderD);  //插入订单
 		for (int i = 0; i < o.getGoodsList().size(); i++) {
 			int goodsId = o.getGoodsList().get(i).getGoodsId();
 			int goodsNum = o.getGoodsList().get(i).getGoodsNum();
@@ -46,17 +54,20 @@ public class OrderServiceImpl implements OrderService {
 			int newInventory = g.getInventory() - goodsNum;
             this.gMapper.updateGoodsNum(newInventory, goodsId);
 			// 更新商品数量
-			int sellerId = g.getUser_id();
-			UserInfo sellerInfo = this.uMapper.getUserInfo(sellerId);
-			BigDecimal number = new BigDecimal(goodsNum);
-			number = BigDecimal.valueOf((int) goodsNum);
-			BigDecimal goodsMoney = g.getPrice().multiply(number);
-			BigDecimal sellerMoney=sellerInfo.getMoney().add(goodsMoney);
-			this.uMapper.updateUserMoney(sellerMoney, sellerInfo.getId());
+//			int sellerId = g.getUser_id();
+//			UserInfo sellerInfo = this.uMapper.getUserInfo(sellerId);
+//			BigDecimal number = new BigDecimal(goodsNum);
+//			number = BigDecimal.valueOf((int) goodsNum);
+//			BigDecimal goodsMoney = g.getPrice().multiply(number);
+//			BigDecimal sellerMoney=sellerInfo.getMoney().add(goodsMoney);
+//			this.uMapper.updateUserMoney(sellerMoney, sellerInfo.getId());
 			//更新商家金额
-			this.oMapper.insertGoodsOrdet(o.getOrderNumber(), goodsId, goodsNum);
+			this.oMapper.insertGoodsOrdet(o.getOrderNumber(), goodsId, goodsNum,0);
 		}
-		return orderD;
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("o", o);
+		quartz.task(new MyFirstJob(),map,o.getOrderNumber());
+		return null;
 	}
 
 	@Override
