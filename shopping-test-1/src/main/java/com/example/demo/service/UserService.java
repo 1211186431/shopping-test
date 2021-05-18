@@ -23,6 +23,8 @@ public interface UserService {
     
     public ArrayList<UserAddress> getUserAddress(int id);
     
-    public int insertUserAddress(int userId,String phone,String address);
+    public UserAddress getAddressById(int id);
+    
+    public int insertUserAddress(int userId,String phone,String address, String receiver);
     
 }

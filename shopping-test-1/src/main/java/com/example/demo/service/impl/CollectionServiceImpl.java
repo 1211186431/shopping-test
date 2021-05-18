@@ -1,8 +1,6 @@
 package com.example.demo.service.impl;
 
 import java.util.ArrayList;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

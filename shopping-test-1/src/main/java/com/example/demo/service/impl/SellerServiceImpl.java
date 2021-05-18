@@ -30,5 +30,11 @@ public class SellerServiceImpl implements SellerService{
 		// TODO Auto-generated method stub
 		return this.soMapper.getSellerOrderInfo(sellerId);
 	}
+
+	@Override
+	public SellerInfo getSellerByGoodsId(int goodsId) {
+		// TODO Auto-generated method stub
+		return this.sMapper.getSellerInfoByGoodsId(goodsId);
+	}
     
 }

@@ -34,4 +34,7 @@ public interface GoodsPicMapper extends BaseMapper<GoodsPic>{
        */
       @Delete("delete from goodsPic where id=#{id}")
       public void deleteGoodsPic(int id);
+      
+      @Select("select picture from goodsPic where id=#{id}")
+      public String getPicPath(int id);
 }

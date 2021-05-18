@@ -19,5 +19,6 @@ public class SellerInfo {
     private int userId;
     private int score;
     private int state;
+    private String sellerName;
     
 }

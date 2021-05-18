@@ -24,7 +24,7 @@ public class OrderR {
       private int userId;
       private BigDecimal Allprice;
       private Date purchasingDate;
-      private String receiver;
+      private int receiver;
       private String payment;
       private int state;
       private ArrayList<GoodsUtil> goodsList;

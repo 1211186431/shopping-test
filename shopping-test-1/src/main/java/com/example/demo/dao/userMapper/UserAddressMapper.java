@@ -11,11 +11,14 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.demo.bean.user.UserAddress;
 @Mapper
 public interface UserAddressMapper extends BaseMapper<UserAddress>{
-      @Insert("insert into useraddress(userId,address,phone) "
-      		+ "values(#{userId},#{address},#{phone})")
+      @Insert("insert into useraddress(userId,address,phone,receiver) "
+      		+ "values(#{userId},#{address},#{phone},#{receiver})")
       @SelectKey(statement ="select last_insert_id()",keyProperty="id",before=false,resultType=int.class)
       public void insertAddress(UserAddress u);
       
       @Select("select * from userAddress where userId=#{userId}")
       public ArrayList<UserAddress> getUserAddress(int userId);
+      
+      @Select("select * from userAddress where id=#{id}")
+      public UserAddress getAddressById(int id);
 }

@@ -5,13 +5,12 @@ import java.util.ArrayList;
 import com.example.demo.bean.PageResult;
 import com.example.demo.bean.goods.Goods;
 import com.example.demo.bean.goods.GoodsPic;
-import com.example.demo.bean.goods.GoodsShow;
 import com.example.demo.bean.goods.GoodsType;
 
 public interface GoodsService {
      public ArrayList<Goods> getAllGoods();
      
-     public PageResult getAllGoodsShow(int pageNum, int pageSize);
+     public PageResult<?> getAllGoodsShow(int pageNum, int pageSize);
      
      public Goods getGoodsById(int goodsId);
      
@@ -31,5 +30,6 @@ public interface GoodsService {
      
      public void deleteGoodsPic(int id);
      
-     public PageResult getGoodsShowByName(int pageNum, int pageSize,String name);
+     public PageResult<?> getGoodsShow(int pageNum, int pageSize,int type,String name,String priceSort
+     		,String salesSort,String gradeSort);
 }

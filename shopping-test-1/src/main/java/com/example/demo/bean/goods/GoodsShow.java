@@ -21,4 +21,6 @@ public class GoodsShow {
     private String name;
     private String picture;
     private int user_id;
+    private int salesNum;
+    private double grade;
 }

@@ -9,4 +9,6 @@ public interface SellerService {
      public SellerInfo getSellerById(int userId);
      
      public ArrayList<SellerOrderInfo> getSellerOrderInfo(int sellerId);
+     
+     public SellerInfo getSellerByGoodsId(int goodsId);
 }

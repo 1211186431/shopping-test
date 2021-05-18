@@ -1,13 +1,14 @@
 package com.example.demo.service.impl;
 
+import java.io.File;
 import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.PageResult;
 import com.example.demo.bean.goods.Goods;
 import com.example.demo.bean.goods.GoodsPic;
+import com.example.demo.bean.goods.GoodsShow;
 import com.example.demo.bean.goods.GoodsType;
 import com.example.demo.dao.goodsMapper.GoodsMapper;
 import com.example.demo.dao.picMapper.GoodsPicMapper;
@@ -30,10 +31,10 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public PageResult getAllGoodsShow(int pageNum, int pageSize) {
+	public PageResult<?> getAllGoodsShow(int pageNum, int pageSize) {
 		// TODO Auto-generated method stub
 		PageHelper.startPage(pageNum, pageSize);
-		PageInfo pageInfos=new PageInfo<>(this.gMapper.getGoodsShow());
+		PageInfo<GoodsShow> pageInfos=new PageInfo<>(this.gMapper.getGoodsShow());
 		return PageUtils.getPageResult(pageInfos);
 	}
 
@@ -100,14 +101,22 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void deleteGoodsPic(int id) {
 		// TODO Auto-generated method stub
-		this.gPMapper.deleteGoodsPic(id);
+		String filePath=this.gPMapper.getPicPath(id);
+		String path="src/main/resources/static"+filePath;
+		File pic=new File(path);
+		if(pic.exists()) {
+			pic.delete();
+			this.gPMapper.deleteGoodsPic(id);
+		}
 	}
 
+	
 	@Override
-	public PageResult getGoodsShowByName(int pageNum, int pageSize, String name) {
+	public PageResult<?> getGoodsShow(int pageNum, int pageSize,int type,String name,String priceSort
+    		,String salesSort,String gradeSort) {
 		// TODO Auto-generated method stub
 		PageHelper.startPage(pageNum, pageSize);
-		PageInfo pageInfos=new PageInfo<>(this.gMapper.getGoodsShowByName(name));
+		PageInfo<GoodsShow> pageInfos=new PageInfo<>(this.gMapper.getGoodsShowByType(type, name, priceSort, salesSort, gradeSort));
 		return PageUtils.getPageResult(pageInfos);
 	}
 

@@ -22,10 +22,9 @@ import com.example.demo.bean.goods.GoodsPic;
 import com.example.demo.bean.goods.GoodsType;
 import com.example.demo.service.GoodsService;
 
-
-
 /**
  * 商品接口
+ * 
  * @author dy-xx
  *
  */
@@ -34,123 +33,152 @@ import com.example.demo.service.GoodsService;
 public class GoodsController {
 	@Autowired
 	private GoodsService goodsService;
-	
+
 	/**
 	 * 获取所有的商品
+	 * 
 	 * @return
 	 */
 	@GetMapping("/goods/getAllGoods")
-	public ArrayList<Goods> getAllGoods(){
+	public ArrayList<Goods> getAllGoods() {
 		return this.goodsService.getAllGoods();
 	}
-	
+
 	/**
 	 * 获取所有商品（分页）
-	 * @param pageNum 页的号码
+	 * 
+	 * @param pageNum  页的号码
 	 * @param pageSize 页的大小
 	 * @return
 	 */
 	@GetMapping("/goods/getAllGoodsShow")
-	public PageResult<?> getAllGoodsShow(@RequestParam(value = "pageNum", required = false, defaultValue = "0") int pageNum,
+	public PageResult<?> getAllGoodsShow(
+			@RequestParam(value = "pageNum", required = false, defaultValue = "0") int pageNum,
 			@RequestParam(value = "pageSize", required = false, defaultValue = "5") int pageSize) {
-		return this.goodsService.getAllGoodsShow(pageNum,pageSize);
+		return this.goodsService.getAllGoodsShow(pageNum, pageSize);
 	}
-	
-	@GetMapping("/goods/getGoodsShowByName")
-	public PageResult<?> getGoodsShowByName(@RequestParam(value = "pageNum", required = false, defaultValue = "0") int pageNum,
-			@RequestParam(value = "pageSize", required = false, defaultValue = "5") int pageSize,@RequestParam("name") String name) {
-		return this.goodsService.getGoodsShowByName(pageNum, pageSize, name);
+
+
+
+	/**
+	 * 
+	 * @param pageNum
+	 * @param pageSize
+	 * @param type 种类id 默认为0
+	 * @param name 名称
+	 * @param priceSort  价格排序方式
+	 * @param salesSort  效率排序方式
+	 * @param gradeSort  评分排序方式
+	 * @return
+	 */
+	@GetMapping("/goods/getGoodsShow")
+	public PageResult<?> getGoodsShowByType(
+			@RequestParam(value = "pageNum", required = false, defaultValue = "0") int pageNum,
+			@RequestParam(value = "pageSize", required = false, defaultValue = "5") int pageSize,
+			@RequestParam("typeId") int type, @RequestParam("goodsName") String name,
+			@RequestParam("priceSort") String priceSort, @RequestParam("salesSort") String salesSort,
+			@RequestParam("gradeSort") String gradeSort) {
+		return this.goodsService.getGoodsShow(pageNum, pageSize, type, name, priceSort, salesSort, gradeSort);
 	}
-	
-	
+
 	/**
 	 * 通过商品Id获取具体信息
+	 * 
 	 * @param goodsId 商品Id
 	 * @return
 	 */
 	@GetMapping("/goods/getGoods")
-	public Goods getGoods(@RequestParam("goodsId") int goodsId){
-		Goods g=this.goodsService.getGoodsById(goodsId);
+	public Goods getGoods(@RequestParam("goodsId") int goodsId) {
+		Goods g = this.goodsService.getGoodsById(goodsId);
 		return g;
 	}
-	
+
 	/**
 	 * 添加商品
+	 * 
 	 * @param g 商品类
 	 * @return 商品id
 	 */
 	@PostMapping("/goods/insertGoods")
 	public int insertGoods(@RequestBody Goods g) {
-		
+
 		return this.goodsService.insertGoods(g);
 	}
-	
+
 	/**
 	 * 更新商品
+	 * 
 	 * @param g 商品类
 	 */
 	@PostMapping("/goods/upDateGoods")
 	public void upDateGoods(@RequestBody Goods g) {
 		this.goodsService.upDateGoods(g);
 	}
-	
+
 	/**
 	 * 获取商家的所有商品
+	 * 
 	 * @param sellerId 商家id
 	 * @return 商品列表
 	 */
 	@GetMapping("/goods/get/Byseller")
-	public ArrayList<Goods> getGoodsBySeller(@RequestParam("sellerId") int sellerId){
+	public ArrayList<Goods> getGoodsBySeller(@RequestParam("sellerId") int sellerId) {
 		return this.goodsService.getGoodsBySeller(sellerId);
 	}
-	
+
 	/**
 	 * 获取所有的种类
+	 * 
 	 * @return
 	 */
 	@GetMapping("/goods/getAllType")
-	public ArrayList<GoodsType> getAllGoodsType(){
+	public ArrayList<GoodsType> getAllGoodsType() {
 		return this.goodsService.getAllGoodsType();
 	}
-	
+
 	/**
 	 * 获取商品的所有照片
+	 * 
 	 * @param goodsId 商品Id
 	 * @return
 	 */
 	@GetMapping("/goods/getGoodsPic")
-	public ArrayList<GoodsPic> getGoodsPic(@RequestParam("goodsId") int goodsId){
+	public ArrayList<GoodsPic> getGoodsPic(@RequestParam("goodsId") int goodsId) {
 		return this.goodsService.getGoodsPic(goodsId);
 	}
-	
+
 	/**
 	 * 删除商品照片
+	 * 
 	 * @param id 照片id
 	 */
 	@PostMapping("/goods/deletePic")
-	public void deleteGoodsPic(@RequestParam("id") int id){
-		 this.goodsService.deleteGoodsPic(id);
+	public void deleteGoodsPic(@RequestParam("id") int id) {
+		this.goodsService.deleteGoodsPic(id);
 	}
-	
+
 	/**
 	 * 上传图片，将图片添加到对应的商品中
-	 * @param file 图片
+	 * 
+	 * @param file    图片
 	 * @param goodsId 商品id
 	 * @return
 	 * @throws IOException
 	 */
 	@PostMapping("/goods/uploadPic")
-	public Map<String, String> insertAudit(MultipartFile file[],@RequestParam("goodsId") int goodsId)  throws IOException{
-		Map<String,String> m=new HashMap<>();
-		for(int i=0;i<file.length;i++) {
-			String f="/goodsPic/"+goodsId+"_"+i+"_"+file[i].getOriginalFilename();
-			String fileName = "src/main/resources/static/goodsPic/"+goodsId+"_"+i+"_"+file[i].getOriginalFilename();
-		    FileOutputStream fos;
+	public Map<String, String> insertAudit(MultipartFile file[], @RequestParam("goodsId") int goodsId)
+			throws IOException {
+		Map<String, String> m = new HashMap<>();
+		for (int i = 0; i < file.length; i++) {
+			String f = "/goodsPic/" + goodsId + "_" + i + "_" + file[i].getOriginalFilename();
+			String fileName = "src/main/resources/static/goodsPic/" + goodsId + "_" + i + "_"
+					+ file[i].getOriginalFilename();
+			FileOutputStream fos;
 			try {
 				fos = new FileOutputStream(new File(fileName));
-			    IOUtils.copy(file[i].getInputStream(),fos);
+				IOUtils.copy(file[i].getInputStream(), fos);
 				fos.close();
-				
+
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 				m.put("error", "文件保存失败");
@@ -161,15 +189,15 @@ public class GoodsController {
 				m.put("error", "文件保存失败");
 				return m;
 			}
-			GoodsPic g=new GoodsPic();
+			GoodsPic g = new GoodsPic();
 			g.setGoodsId(goodsId);
 			g.setPicture(f);
 			this.goodsService.insertGoodsPic(g);
-			if(i==0) {
+			if (i == 0) {
 				this.goodsService.upDateGoodsPic(f, goodsId);
 			}
 		}
-		m.put("msg", goodsId+"");
+		m.put("msg", goodsId + "");
 		return m;
 	}
 }

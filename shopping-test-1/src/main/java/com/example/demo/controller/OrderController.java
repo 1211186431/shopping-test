@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.bean.goods.OrderDetail;
+import com.example.demo.bean.goods.OrderGoods;
 import com.example.demo.bean.goods.OrderR;
 import com.example.demo.service.OrderService;
 /**
@@ -43,7 +44,7 @@ public class OrderController {
     @PostMapping("/Order/update")
     public String updateOrder(@RequestParam("OrderNum") String OrderNum,@RequestParam("state") int state) {
     	this.oService.updateOrder(OrderNum, state);
-    	return "123";
+    	return "ok";
     }
     
     /**
@@ -52,7 +53,7 @@ public class OrderController {
      * @return
      */
     @GetMapping("/Order/get")
-    public OrderR getOrderDetail(@RequestParam("orderNum") String orderNum){
+    public OrderDetail getOrderDetail(@RequestParam("orderNum") String orderNum){
     	return this.oService.getOrderByNum(orderNum);
     }
     
@@ -62,7 +63,17 @@ public class OrderController {
      * @return
      */
     @GetMapping("/Order/getUserOrder")
-    public ArrayList<OrderR> getUserOrder(@RequestParam("userId")int user_id){
+    public ArrayList<OrderDetail> getUserOrder(@RequestParam("userId")int user_id){
     	return this.oService.getUserOrder(user_id);
+    }
+    
+    /**
+     * 获取订单中的商品具体信息
+     * @param orderNum
+     * @return
+     */
+    @GetMapping("/Order/getOrderGoods")
+    public ArrayList<OrderGoods> getOrderGoods(@RequestParam("orderNum")String orderNum){
+    	return this.oService.getOrderGoods(orderNum);
     }
 }

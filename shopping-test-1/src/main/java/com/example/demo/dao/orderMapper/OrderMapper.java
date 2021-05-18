@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.demo.bean.goods.OrderDetail;
-import com.example.demo.helper.GoodsUtil;
+import com.example.demo.bean.goods.OrderGoods;
 
 @Mapper
 public interface OrderMapper extends BaseMapper<OrderDetail>{
@@ -65,6 +65,8 @@ public interface OrderMapper extends BaseMapper<OrderDetail>{
      * @param o
      * @return
      */
-    @Select("select goodsId,goodsNum,state from goods_order where orderNumber=#{o}")
-    public ArrayList<GoodsUtil> getGoodsUtil(String o);
+    @Select("select a.id,orderNumber,goodsId,goodsNum,g.state,name,price,picture from goods_order a JOIN goods g ON a.goodsId=g.id  where orderNumber=#{o}")
+    public ArrayList<OrderGoods> getGoodsUtil(String o);
+    
+    
 }

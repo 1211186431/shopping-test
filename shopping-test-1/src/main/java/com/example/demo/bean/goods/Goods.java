@@ -30,5 +30,7 @@ public class Goods {
     private String name;
     private String picture;
     private String delivery;
+    private int salesNum;
+    private double grade;
     private ArrayList<GoodsType> goodstype;
 }

@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -58,21 +60,31 @@ public interface GoodsMapper extends BaseMapper<Goods>{
     public ArrayList<GoodsShow> getGoodsShowByName(String name);
     
     /**
+     * 按照类别模糊搜索商品
+     * @param name
+     * @return
+     */
+    //@Select("SELECT g.id,g.price,g.name,g.picture,g.user_id FROM type t JOIN goodstype gt ON t.id=gt.type_id JOIN goods g ON gt.goods_id=g.id WHERE gt.type_id=#{type}") 
+    @SelectProvider(type = GoodsSelect.class, method = "getGoodsShow")
+    public ArrayList<GoodsShow> getGoodsShowByType(@Param("type")int type,@Param("name")String name,@Param("priceSort")String priceSort
+    		,@Param("salesSort")String salesSort,@Param("gradeSort")String gradeSort);
+    
+    /**
      * 获取指定商品id
      * @param goodsId 商品id
      * @return
      */
     @Select("select * from goods where id=#{goodsId}")
     public Goods getGoodsById(int goodsId);
-    
+     
     /**
      * 更新商品库存
      * @param num
      * @param goodsId
      * @return
      */
-    @Update("update goods set inventory=#{num} where id=#{goodsId}")
-    public int updateGoodsNum(int num,int goodsId);
+    @Update("update goods set inventory=#{num} salesNum=#{salesNum} where id=#{goodsId}")
+    public int updateGoodsNum(int num,int goodsId,int salesNum);
     
     /**
      * 插入商品信息
@@ -142,4 +154,5 @@ public interface GoodsMapper extends BaseMapper<Goods>{
      */
     @Select("select * from goods where user_id=#{sellerId}")
     public ArrayList<Goods> getGoodsBySeller(int sellerId);
+    
 }

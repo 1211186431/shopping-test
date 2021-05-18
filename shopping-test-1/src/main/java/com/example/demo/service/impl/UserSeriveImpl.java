@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -75,12 +73,13 @@ public class UserSeriveImpl implements UserService {
 	}
 
 	@Override
-	public int insertUserAddress(int userId, String phone, String address) {
+	public int insertUserAddress(int userId, String phone, String address,String receiver) {
 		// TODO Auto-generated method stub
 		UserAddress u=new UserAddress();
 		u.setAddress(address);
 		u.setPhone(phone);
 		u.setUserId(userId);
+		u.setReceiver(receiver);
 		this.UAMapper.insertAddress(u);
 		return u.getId();
 	}
@@ -89,6 +88,12 @@ public class UserSeriveImpl implements UserService {
 	public List<UserInfo> getAll() {
 		// TODO Auto-generated method stub
 		return this.UserMapper.getAll();
+	}
+
+	@Override
+	public UserAddress getAddressById(int id) {
+		// TODO Auto-generated method stub
+		return this.UAMapper.getAddressById(id);
 	}
 
 }

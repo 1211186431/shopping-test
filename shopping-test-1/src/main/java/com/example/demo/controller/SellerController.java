@@ -31,12 +31,22 @@ public class SellerController {
      }
      
      /**
-      * 获取商家的订单
+      * 通过商家id获取商家的订单
       * @param sellerId 商家id
       * @return 商家订单列表
       */
      @GetMapping("/seller/getSellerOrder")
      public ArrayList<SellerOrderInfo> getSellerOrderInfo(@RequestParam("sellerId") int sellerId) {
     	 return this.sService.getSellerOrderInfo(sellerId);
+     }
+     
+     /**
+      * 通过商品id获取商家信息
+      * @param sellerId 商家id
+      * @return 商家订单列表
+      */
+     @GetMapping("/seller/getSellerInfoByGoods")
+     public SellerInfo getSellerInfoByGoodsId(@RequestParam("goodsId") int goodsId) {
+    	 return this.sService.getSellerByGoodsId(goodsId);
      }
 }

@@ -53,7 +53,9 @@ public class AuditServiceImpl implements AuditService {
 		if(state==1) {
 			SellerInfo s=new SellerInfo();
 			int userId=this.bMapper.getUserId(AuditId);
+			UserInfo u=this.uMapper.getUserInfo(userId); 
 			s.setUserId(userId);
+			s.setSellerName(u.getName());
 			this.sMapper.insertSellerInfo(s);
 			this.uMapper.updateUserRole("ROLR_admin", userId);
 		}

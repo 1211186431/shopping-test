@@ -23,7 +23,7 @@ public class CartController {
      * @return
      */
     @GetMapping("/cart/getCart")
-    public ArrayList<ShoppingCart> getUserCart(@RequestParam("userId")int userId){
+    public  ArrayList<ShoppingCart> getUserCart(@RequestParam("userId")int userId){
     	return this.cService.getUserCart(userId);
     }
 	

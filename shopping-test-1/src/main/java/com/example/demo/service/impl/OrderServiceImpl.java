@@ -2,7 +2,6 @@ package com.example.demo.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,12 +11,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.goods.Goods;
 import com.example.demo.bean.goods.OrderDetail;
+import com.example.demo.bean.goods.OrderGoods;
 import com.example.demo.bean.goods.OrderR;
 import com.example.demo.bean.user.UserInfo;
 import com.example.demo.dao.goodsMapper.GoodsMapper;
 import com.example.demo.dao.orderMapper.OrderMapper;
 import com.example.demo.dao.userMapper.UserMapper;
-import com.example.demo.helper.GoodsUtil;
 import com.example.demo.helper.OrderUtil;
 import com.example.demo.orderJob.MyFirstJob;
 import com.example.demo.orderJob.QuartzConfig;
@@ -52,7 +51,8 @@ public class OrderServiceImpl implements OrderService {
 			int goodsNum = o.getGoodsList().get(i).getGoodsNum();
 			Goods g = this.gMapper.getGoodsById(goodsId);
 			int newInventory = g.getInventory() - goodsNum;
-            this.gMapper.updateGoodsNum(newInventory, goodsId);
+			int salesNum=g.getSalesNum()+goodsNum;
+            this.gMapper.updateGoodsNum(newInventory, goodsId,salesNum);
 			// 更新商品数量
 //			int sellerId = g.getUser_id();
 //			UserInfo sellerInfo = this.uMapper.getUserInfo(sellerId);
@@ -77,26 +77,25 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderR getOrderByNum(String orderNum) {
+	public OrderDetail getOrderByNum(String orderNum) {
 		// TODO Auto-generated method stub
 		OrderDetail od = this.oMapper.getOrderByNum(orderNum);
-		ArrayList<GoodsUtil> a = this.oMapper.getGoodsUtil(orderNum);
-		OrderUtil ou = new OrderUtil();
-		return ou.getOrderR(od, a);
+		return od;
 	}
 
 	@Override
-	public ArrayList<OrderR> getUserOrder(int user_id) {
+	public ArrayList<OrderDetail> getUserOrder(int user_id) {
 		// TODO Auto-generated method stub
 		ArrayList<OrderDetail> a = this.oMapper.getUserOrder(user_id);
-		ArrayList<OrderR> or = new ArrayList<OrderR>();
-		OrderUtil ou = new OrderUtil();
-		for (int i = 0; i < a.size(); i++) {
-			OrderDetail o = a.get(i);
-			ArrayList<GoodsUtil> g = this.oMapper.getGoodsUtil(o.getOrderNumber());
-			or.add(ou.getOrderR(o, g));
-		}
-		return or;
+		return a;
 	}
+
+	@Override
+	public ArrayList<OrderGoods> getOrderGoods(String o) {
+		// TODO Auto-generated method stub
+		return this.oMapper.getGoodsUtil(o);
+	}
+	
+	
 
 }

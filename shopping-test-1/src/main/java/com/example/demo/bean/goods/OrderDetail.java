@@ -22,7 +22,7 @@ public class OrderDetail {
     private int user_id;
     private BigDecimal Allprice;
     private Date purchasingDate;
-    private String receiver;
+    private int receiver;
     private String payment;
     private int state;
 }

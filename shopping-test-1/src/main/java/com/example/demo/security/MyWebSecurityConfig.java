@@ -61,8 +61,9 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 						response.setContentType("application/json;charset=utf-8");
 						PrintWriter out = response.getWriter();
 						Map<String, Object> map = new HashMap<>();
-						map.put("status", 200);
-						map.put("msg", principal);
+						map.put("code", 200);
+						map.put("msg","登录成功");
+						map.put("data", principal);
 						ObjectMapper om = new ObjectMapper();
 						out.write(om.writeValueAsString(map));
 						out.flush();
@@ -79,7 +80,7 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 						PrintWriter out = response.getWriter();
 						// response.setStatus(401); //如果不注释，前端报错，没有信息
 						Map<String, Object> map = new HashMap<>();
-						map.put("status", 401);
+						map.put("code", 401);
 						if (exception instanceof LockedException) {
 							map.put("msg", "账户被锁定，登录失败");
 						} else if (exception instanceof BadCredentialsException) {
@@ -118,6 +119,7 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 						response.setContentType("application/json;charset=utf-8");
 						PrintWriter out = response.getWriter();
 						Map<String, Object> map = new HashMap<>();
+						map.put("code", 200);
 						map.put("msg", "退出成功");
 						ObjectMapper om = new ObjectMapper();
 						out.write(om.writeValueAsString(map));
