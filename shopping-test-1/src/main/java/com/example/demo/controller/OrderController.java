@@ -35,16 +35,12 @@ public class OrderController {
 		return this.oService.insertOrder(orderR);  
     }
     
-    /**
-     * 更新订单状态
-     * @param OrderNum 订单号
-     * @param state  状态
-     * @return
-     */
+   
+    
     @PostMapping("/Order/update")
-    public String updateOrder(@RequestParam("OrderNum") String OrderNum,@RequestParam("state") int state) {
-    	this.oService.updateOrder(OrderNum, state);
-    	return "ok";
+    public String updateOrder(@RequestParam("OrderId") int orderId,@RequestParam("state") int state) throws SchedulerException {
+    	this.oService.updateOrder(orderId,state);
+    	return "";
     }
     
     /**

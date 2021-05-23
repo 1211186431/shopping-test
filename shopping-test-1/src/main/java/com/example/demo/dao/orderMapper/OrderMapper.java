@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -46,26 +47,22 @@ public interface OrderMapper extends BaseMapper<OrderDetail>{
     @Select("select * from Myorder where user_id=#{user_id}")
     public ArrayList<OrderDetail> getUserOrder(int user_id);
     
-    /**
-     * 设置订单中商品和数量
-     * @param o
-     * @param goodsId
-     * @param num
-     */
+   
     @Insert("insert into goods_order(orderNumber,goodsId,goodsNum,state) "
-    		+ "values(#{o},#{goodsId},#{num},#{state})")
-    public void insertGoodsOrdet(String o,int goodsId,int num,int state);
+    		+ "values(#{orderNumber},#{goodsId},#{goodsNum},#{state})")
+    @SelectKey(statement ="select last_insert_id()",keyProperty="id",before=false,resultType=int.class)
+    public void insertGoodsOrdet(OrderGoods o);
     
     
-    @Update("update goods_order set state=#{state} where orderNumber=#{o}")
-    public void upDateGoodsOrdet(String o,int state);
+    @Update("update goods_order set state=#{state} where id=#{id}")
+    public void upDateGoodsOrdet(int id,int state);
     
     /**
      * 订单信息辅助
      * @param o
      * @return
      */
-    @Select("select a.id,orderNumber,goodsId,goodsNum,g.state,name,price,picture from goods_order a JOIN goods g ON a.goodsId=g.id  where orderNumber=#{o}")
+    @Select("select a.id,orderNumber,goodsId,goodsNum,a.state,name,price,picture from goods_order a JOIN goods g ON a.goodsId=g.id  where orderNumber=#{o}")
     public ArrayList<OrderGoods> getGoodsUtil(String o);
     
     

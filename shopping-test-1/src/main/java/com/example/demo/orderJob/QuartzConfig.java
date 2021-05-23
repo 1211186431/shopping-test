@@ -40,7 +40,7 @@ public class QuartzConfig {
         Trigger trigger = TriggerBuilder.newTrigger()
                 .withIdentity(key)
                 // 执行时间
-                .startAt(new Date(System.currentTimeMillis() + 1000*60*5))
+                .startAt(new Date(System.currentTimeMillis() + 1000*60))
                 .build();
         scheduler.scheduleJob(jobDetail , trigger);
 	}

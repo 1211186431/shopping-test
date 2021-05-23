@@ -11,7 +11,7 @@ import com.example.demo.bean.goods.OrderR;
 public interface OrderService {
     public OrderDetail insertOrder(OrderR o) throws SchedulerException;
     
-    public void updateOrder(String orderNum,int state);
+    public void updateOrder(int OrderId,int state) throws SchedulerException;
     
     public OrderDetail getOrderByNum(String orderNum);
     

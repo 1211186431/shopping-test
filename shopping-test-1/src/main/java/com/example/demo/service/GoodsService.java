@@ -32,4 +32,6 @@ public interface GoodsService {
      
      public PageResult<?> getGoodsShow(int pageNum, int pageSize,int type,String name,String priceSort
      		,String salesSort,String gradeSort);
+
+	public void updateGoodsState(int state, int goodsId);
 }

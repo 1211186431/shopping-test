@@ -17,11 +17,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SellerOrderInfo {
+	private int id;
     private String orderNumber;
     private Date purchasingDate;
     private int goodsId;
     private int goodsNum;
     private int sellerId;
     private int userId;
+    private int state;
+    private int receiver;
     
 }

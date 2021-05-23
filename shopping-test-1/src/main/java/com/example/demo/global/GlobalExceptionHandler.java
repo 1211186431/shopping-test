@@ -3,6 +3,7 @@ package com.example.demo.global;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.quartz.SchedulerException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -58,5 +59,16 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<String> handleSQLError(Exception e) {
 		log.info("catch exception:" + e.getMessage() );
 		return new ResponseEntity<>("数据库异常 (" + e.getMessage() + ")", HttpStatus.OK);
+	} 
+ 	
+ 	/**
+ 	 * 定时任务异常
+ 	 * @param e
+ 	 * @return
+ 	 */
+ 	@ExceptionHandler(SchedulerException.class)
+	public ResponseEntity<String> handleJobError(Exception e) {
+		log.info("catch exception:" + e.getMessage() );
+		return new ResponseEntity<>("定时任务异常 (" + e.getMessage() + ")", HttpStatus.OK);
 	} 
 }

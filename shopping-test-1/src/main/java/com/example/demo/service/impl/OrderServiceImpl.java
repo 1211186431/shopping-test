@@ -54,26 +54,23 @@ public class OrderServiceImpl implements OrderService {
 			int salesNum=g.getSalesNum()+goodsNum;
             this.gMapper.updateGoodsNum(newInventory, goodsId,salesNum);
 			// 更新商品数量
-//			int sellerId = g.getUser_id();
-//			UserInfo sellerInfo = this.uMapper.getUserInfo(sellerId);
-//			BigDecimal number = new BigDecimal(goodsNum);
-//			number = BigDecimal.valueOf((int) goodsNum);
-//			BigDecimal goodsMoney = g.getPrice().multiply(number);
-//			BigDecimal sellerMoney=sellerInfo.getMoney().add(goodsMoney);
-//			this.uMapper.updateUserMoney(sellerMoney, sellerInfo.getId());
-			//更新商家金额
-			this.oMapper.insertGoodsOrdet(o.getOrderNumber(), goodsId, goodsNum,0);
+            OrderGoods orderGoods=new OrderGoods();
+            orderGoods.setGoodsId(goodsId);
+            orderGoods.setGoodsNum(goodsNum);
+            orderGoods.setOrderNumber(o.getOrderNumber());
+            orderGoods.setState(0);
+			this.oMapper.insertGoodsOrdet(orderGoods);
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("o", orderGoods);
+			quartz.task(new MyFirstJob(),map,orderGoods.getId()+"");
 		}
-		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("o", o);
-		quartz.task(new MyFirstJob(),map,o.getOrderNumber());
 		return null;
 	}
 
 	@Override
-	public void updateOrder(String o, int state) {
+	public void updateOrder(int OrderId,int state) throws SchedulerException {
 		// TODO Auto-generated method stub
-		this.oMapper.updateOrder(o, state);
+		this.oMapper.upDateGoodsOrdet(OrderId,state);
 	}
 
 	@Override

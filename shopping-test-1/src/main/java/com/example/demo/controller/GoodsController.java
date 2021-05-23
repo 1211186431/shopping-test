@@ -156,7 +156,17 @@ public class GoodsController {
 	public void deleteGoodsPic(@RequestParam("id") int id) {
 		this.goodsService.deleteGoodsPic(id);
 	}
-
+	
+	/**
+	 * 更新商品状态（上架/下架）
+	 * @param goodsId
+	 * @param state
+	 */
+	@PostMapping("/goods/setGoodsState")
+	public void upDateGoodsState(@RequestParam("goodsId") int goodsId, @RequestParam("state") int state) {
+		this.goodsService.updateGoodsState(state, goodsId);
+	}
+	
 	/**
 	 * 上传图片，将图片添加到对应的商品中
 	 * 

@@ -15,7 +15,7 @@ public interface SellerOrderMapper extends BaseMapper<SellerOrderInfo>{
 	 * @return
 	 */
 	@Select("SELECT"
-			+ "	myorder.orderNumber,myorder.purchasingDate,goods.id AS goodsId,goods_order.goodsNum,goods.user_id AS sellerId,myorder.user_id AS userId\r\n"
+			+ "	myorder.receiver,goods_order.id,goods_order.state,myorder.orderNumber,myorder.purchasingDate,goods.id AS goodsId,goods_order.goodsNum,goods.user_id AS sellerId,myorder.user_id AS userId "
 			+ "FROM "
 			+ "	goods_order"
 			+ "	JOIN goods ON goods_order.goodsId = goods.id "

@@ -83,7 +83,7 @@ public interface GoodsMapper extends BaseMapper<Goods>{
      * @param goodsId
      * @return
      */
-    @Update("update goods set inventory=#{num} salesNum=#{salesNum} where id=#{goodsId}")
+    @Update("update goods set inventory=#{num},salesNum=#{salesNum} where id=#{goodsId}")
     public int updateGoodsNum(int num,int goodsId,int salesNum);
     
     /**

@@ -120,4 +120,10 @@ public class GoodsServiceImpl implements GoodsService {
 		return PageUtils.getPageResult(pageInfos);
 	}
 
+	@Override
+	public void updateGoodsState(int state, int goodsId) {
+		// TODO Auto-generated method stub
+		this.gMapper.upDateGoodsState(state, goodsId);
+	}
+
 }
