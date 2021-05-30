@@ -13,7 +13,7 @@ import com.example.demo.bean.collection.Collection;
 
 @Mapper
 public interface UserCMapper extends BaseMapper<Collection>{
-    @Select("select Coll.id,Coll.user_id,coll.goods_id,price,goods.`name`,createDate from Coll join goods on Coll.goods_id=goods.id where Coll.user_id=#{userId}")
+    @Select("select Coll.id,Coll.user_id,coll.goods_id,price,goods.`name`,createDate,goods.picture from Coll join goods on Coll.goods_id=goods.id where Coll.user_id=#{userId}")
     public ArrayList<Collection> getCollection(int userId);
     
     @Insert("insert into Coll(user_id,goods_id,createDate)"

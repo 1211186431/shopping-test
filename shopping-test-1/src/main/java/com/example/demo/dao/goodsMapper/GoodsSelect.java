@@ -9,7 +9,7 @@ public class GoodsSelect {
 		 String str="SELECT"
 		 		+ "	g.id,"
 		 		+ "	g.price,"
-		 		+ "	g.NAME,"
+		 		+ "	g.name,"
 		 		+ "	g.picture,"
 		 		+ "	g.user_id,"
 		 		+ " g.salesNum,"
@@ -39,7 +39,7 @@ public class GoodsSelect {
 			 g="goods";
 		 }
 		 if(map.get("name")!="") {
-			 str=str+a+ "where "+g+".state=1 && g.name like CONCAT('%','"+map.get("name")+"','%')";
+			 str=str+a+ "where "+g+".state=1 && "+g+".`name` like CONCAT('%','"+map.get("name")+"','%')";
 		 }
 		 if(!(map.get("priceSort")=="" && map.get("salesSort")=="" && map.get("gradeSort")=="")) {
 			 String f= " ORDER BY ";

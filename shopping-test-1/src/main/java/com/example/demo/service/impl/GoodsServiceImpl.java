@@ -23,7 +23,7 @@ public class GoodsServiceImpl implements GoodsService {
     
     @Autowired 
     private GoodsPicMapper gPMapper;
-    
+       
 	@Override
 	public ArrayList<Goods> getAllGoods() {
 		// TODO Auto-generated method stub

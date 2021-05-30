@@ -57,7 +57,7 @@ public class AuditServiceImpl implements AuditService {
 			s.setUserId(userId);
 			s.setSellerName(u.getName());
 			this.sMapper.insertSellerInfo(s);
-			this.uMapper.updateUserRole("ROLR_admin", userId);
+			this.uMapper.updateUserRole("ROLE_seller", userId);
 		}
 		return 1;
 	}

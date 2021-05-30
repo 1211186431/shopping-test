@@ -181,4 +181,25 @@ public class UserController {
 		return this.userService.getAll();
 	}
    
+	/**
+	 * 更新用户收货地址
+	 * @param userId
+	 * @param phone
+	 * @param address
+	 * @param receiver
+	 * @param id
+	 */
+	@PostMapping("/user/updateAddress")
+	public void updateAddress(@RequestParam("userId")int userId, @RequestParam("phone")String phone, @RequestParam("address")String address, @RequestParam("receiver")String receiver,@RequestParam("id")int id) {
+		this.userService.UpdateAddress(userId, phone, address, receiver, id);
+	}
+	
+	/**
+	 * 更新用户收货地址
+	 * @param id
+	 */
+	@PostMapping("/user/deleteAddress")
+	public void deleteAddress(@RequestParam("id")int id) {
+		this.userService.DeleteAddress(id);
+	}
 }

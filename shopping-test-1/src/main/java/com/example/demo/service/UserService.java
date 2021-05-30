@@ -27,4 +27,8 @@ public interface UserService {
     
     public int insertUserAddress(int userId,String phone,String address, String receiver);
     
+    public void UpdateAddress(int userId,String phone,String address, String receiver,int id);
+    
+    public void DeleteAddress(int id);
+    
 }

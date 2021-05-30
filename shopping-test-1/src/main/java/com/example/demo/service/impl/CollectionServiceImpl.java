@@ -5,12 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.collection.Collection;
+import com.example.demo.dao.goodsMapper.GoodsMapper;
 import com.example.demo.dao.userMapper.UserCMapper;
 import com.example.demo.service.CollectionService;
 @Service
 public class CollectionServiceImpl implements CollectionService {
     @Autowired 
     UserCMapper cMapper;
+    
+    @Autowired
+    GoodsMapper gMapper;
     
 	@Override
 	public ArrayList<Collection> getCollection(int userId) {

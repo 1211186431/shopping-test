@@ -20,6 +20,7 @@ import com.example.demo.bean.PageResult;
 import com.example.demo.bean.goods.Goods;
 import com.example.demo.bean.goods.GoodsPic;
 import com.example.demo.bean.goods.GoodsType;
+import com.example.demo.helper.StaticSource;
 import com.example.demo.service.GoodsService;
 
 /**
@@ -34,6 +35,8 @@ public class GoodsController {
 	@Autowired
 	private GoodsService goodsService;
 
+	@Autowired
+    private StaticSource messageSource;
 	/**
 	 * 获取所有的商品
 	 * 
@@ -101,7 +104,6 @@ public class GoodsController {
 	 */
 	@PostMapping("/goods/insertGoods")
 	public int insertGoods(@RequestBody Goods g) {
-
 		return this.goodsService.insertGoods(g);
 	}
 
@@ -178,10 +180,11 @@ public class GoodsController {
 	@PostMapping("/goods/uploadPic")
 	public Map<String, String> insertAudit(MultipartFile file[], @RequestParam("goodsId") int goodsId)
 			throws IOException {
+		String url = messageSource.getPicurl();
 		Map<String, String> m = new HashMap<>();
 		for (int i = 0; i < file.length; i++) {
 			String f = "/goodsPic/" + goodsId + "_" + i + "_" + file[i].getOriginalFilename();
-			String fileName = "src/main/resources/static/goodsPic/" + goodsId + "_" + i + "_"
+			String fileName = url+"/goodsPic/" + goodsId + "_" + i + "_"
 					+ file[i].getOriginalFilename();
 			FileOutputStream fos;
 			try {

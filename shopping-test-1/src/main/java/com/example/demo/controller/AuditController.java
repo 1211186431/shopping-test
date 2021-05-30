@@ -21,6 +21,7 @@ import com.example.demo.bean.audit.BusinessAudit;
 import com.example.demo.bean.comment.UserComment;
 import com.example.demo.bean.goods.Goods;
 import com.example.demo.bean.user.UserInfo;
+import com.example.demo.helper.StaticSource;
 import com.example.demo.service.AuditService;
 /**
  * 管理员审核相关接口
@@ -31,7 +32,9 @@ import com.example.demo.service.AuditService;
 public class AuditController {
 	@Autowired
 	AuditService auditService;
-    
+	@Autowired
+    private StaticSource messageSource;
+	
 	/**
 	 * 获取管理员审核的所有信息
 	 * @param adminId 管理员Id
@@ -74,6 +77,7 @@ public class AuditController {
 	@PostMapping("/audit/insert")
 	public Map<String, Object> insertAudit(@RequestParam("certificates") MultipartFile file,
 			@RequestParam("userId") int userId) throws IOException {
+		String url = messageSource.getPicurl();
 		int state = this.auditService.getUserState(userId);
 		Map<String, Object> map = new HashMap<>();
 		if (state == 1) {
@@ -87,7 +91,7 @@ public class AuditController {
 				map.put("msg", "文件上传失败");
 				return map;
 			}
-			String fileName = "src/main/resources/static/audit/" + userId + "_" + file.getOriginalFilename();
+			String fileName = url+"/audit/" + userId + "_" + file.getOriginalFilename();
 			FileOutputStream fos;
 			try {
 				fos = new FileOutputStream(new File(fileName));

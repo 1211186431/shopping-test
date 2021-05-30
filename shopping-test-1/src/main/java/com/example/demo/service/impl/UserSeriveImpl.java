@@ -96,4 +96,17 @@ public class UserSeriveImpl implements UserService {
 		return this.UAMapper.getAddressById(id);
 	}
 
+	@Override
+	public void UpdateAddress(int userId, String phone, String address, String receiver,int id) {
+		// TODO Auto-generated method stub
+		this.UAMapper.UpdateAddress(userId, phone, address, receiver, id);
+	}
+
+	@Override
+	public void DeleteAddress(int id) {
+		// TODO Auto-generated method stub
+		this.UAMapper.DeleteAddress(id);
+		
+	}
+
 }

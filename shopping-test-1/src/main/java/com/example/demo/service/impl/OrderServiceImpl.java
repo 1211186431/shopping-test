@@ -2,10 +2,20 @@ package com.example.demo.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.quartz.Job;
+import org.quartz.JobBuilder;
+import org.quartz.JobDataMap;
+import org.quartz.JobDetail;
+import org.quartz.JobKey;
+import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,10 +49,10 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public OrderDetail insertOrder(OrderR o) throws SchedulerException {
 		// TODO Auto-generated method stub
-		UserInfo userInfo = this.uMapper.getUserInfo(o.getUserId());
-		BigDecimal newMoney = userInfo.getMoney().subtract(o.getAllprice());
-        this.uMapper.updateUserMoney(newMoney, userInfo.getId());
-		// 更新用户金额
+//		UserInfo userInfo = this.uMapper.getUserInfo(o.getUserId());
+//		BigDecimal newMoney = userInfo.getMoney().subtract(o.getAllprice());
+//        this.uMapper.updateUserMoney(newMoney, userInfo.getId());
+//		// 更新用户金额
 		OrderUtil ou = new OrderUtil();
 		OrderDetail orderD = ou.getOrderD(o);
 		this.oMapper.insertOrder(orderD);  //插入订单
@@ -64,9 +74,9 @@ public class OrderServiceImpl implements OrderService {
 			map.put("o", orderGoods);
 			quartz.task(new MyFirstJob(),map,orderGoods.getId()+"");
 		}
-		return null;
+		return orderD;
 	}
-
+	
 	@Override
 	public void updateOrder(int OrderId,int state) throws SchedulerException {
 		// TODO Auto-generated method stub

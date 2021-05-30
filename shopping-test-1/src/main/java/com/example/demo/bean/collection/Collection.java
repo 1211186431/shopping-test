@@ -22,4 +22,5 @@ public class Collection {
     private Date createDate;
     private BigDecimal price;
     private String name;
+    private String picture;
 }
