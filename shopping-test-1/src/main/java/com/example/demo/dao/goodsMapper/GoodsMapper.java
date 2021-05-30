@@ -92,7 +92,7 @@ public interface GoodsMapper extends BaseMapper<Goods>{
      * @return
      */
     @Insert("insert into goods(user_id,price,inventory,oldAndnew,state,name,details,"
-    		+ "onsaleDate,picture,bargain,delivery) values(#{user_id},#{price},#{inventory},#{oldAndnew},#{state},"
+    		+ "onsaleDate,picture,bargain,delivery) values(#{user_id},#{price},#{inventory},#{oldAndnew},0,"
     		+ "#{name},#{details},#{onsaleDate},#{picture},#{bargain},#{delivery})")
     @SelectKey(statement ="select last_insert_id()",keyProperty="id",before=false,resultType=int.class)
     public int insertGoods(Goods g);

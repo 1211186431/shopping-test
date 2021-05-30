@@ -23,7 +23,7 @@ public class GoodsSelect {
 		 if(!map.get("type").equals(0)) {
 			 str=str+ "WHERE"
 				+ "	gt.type_id = "+map.get("type");
-			 a=" and ";
+			 a=" g.state=1 and ";
 			 g="g";
 		 }else {
 			 str="SELECT"
@@ -35,11 +35,11 @@ public class GoodsSelect {
 			 		+ "	salesNum,"
 			 		+ "	grade "
 			 		+ "FROM "
-			 		+ "	goods ";
+			 		+ "	goods where goods.state=1 ";
 			 g="goods";
 		 }
 		 if(map.get("name")!="") {
-			 str=str+a+ "where "+g+".state=1 && "+g+".`name` like CONCAT('%','"+map.get("name")+"','%')";
+			 str=str+a+ " and "+g+".state=1 && "+g+".`name` like CONCAT('%','"+map.get("name")+"','%')";
 		 }
 		 if(!(map.get("priceSort")=="" && map.get("salesSort")=="" && map.get("gradeSort")=="")) {
 			 String f= " ORDER BY ";
