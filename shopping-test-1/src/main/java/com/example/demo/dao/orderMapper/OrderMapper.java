@@ -48,12 +48,21 @@ public interface OrderMapper extends BaseMapper<OrderDetail>{
     public ArrayList<OrderDetail> getUserOrder(int user_id);
     
    
+    /**
+     * 插入订单
+     * @param o
+     */
     @Insert("insert into goods_order(orderNumber,goodsId,goodsNum,state) "
     		+ "values(#{orderNumber},#{goodsId},#{goodsNum},#{state})")
     @SelectKey(statement ="select last_insert_id()",keyProperty="id",before=false,resultType=int.class)
     public void insertGoodsOrdet(OrderGoods o);
     
     
+    /**
+     * 更新订单状态
+     * @param id
+     * @param state
+     */
     @Update("update goods_order set state=#{state} where id=#{id}")
     public void upDateGoodsOrdet(int id,int state);
     

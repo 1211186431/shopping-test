@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.user.UserInfo;
 import com.example.demo.dao.userMapper.UserMapper;
+/**
+ * 登录
+ * @author dy-xx
+ *
+ */
 @Service
 public class LoginService implements UserDetailsService {
     

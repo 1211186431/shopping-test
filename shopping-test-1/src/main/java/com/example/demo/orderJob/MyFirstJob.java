@@ -17,6 +17,11 @@ import com.example.demo.helper.ApplicationContextUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 任务类，在任务中更新商家金额
+ * @author dy-xx
+ *
+ */
 @Component
 @Slf4j
 public class MyFirstJob extends QuartzJobBean {

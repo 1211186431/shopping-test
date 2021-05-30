@@ -36,7 +36,13 @@ public class OrderController {
     }
     
    
-    
+    /**
+     * 更新（具体）订单状态
+     * @param orderId
+     * @param state
+     * @return
+     * @throws SchedulerException
+     */
     @PostMapping("/Order/update")
     public String updateOrder(@RequestParam("OrderId") int orderId,@RequestParam("state") int state) throws SchedulerException {
     	this.oService.updateOrder(orderId,state);

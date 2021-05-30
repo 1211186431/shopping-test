@@ -3,6 +3,11 @@ package com.example.demo.dao.goodsMapper;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
+/**
+ * 动态设置语句
+ * @author dy-xx
+ *
+ */
 @Component
 public class GoodsSelect {
 	 public String getGoodsShow(Map<String,Object> map){
@@ -36,10 +41,11 @@ public class GoodsSelect {
 			 		+ "	grade "
 			 		+ "FROM "
 			 		+ "	goods where goods.state=1 ";
+			 a="and";
 			 g="goods";
 		 }
 		 if(map.get("name")!="") {
-			 str=str+a+ " and "+g+".state=1 && "+g+".`name` like CONCAT('%','"+map.get("name")+"','%')";
+			 str=str+a+ " "+g+".state=1 && "+g+".`name` like CONCAT('%','"+map.get("name")+"','%')";
 		 }
 		 if(!(map.get("priceSort")=="" && map.get("salesSort")=="" && map.get("gradeSort")=="")) {
 			 String f= " ORDER BY ";

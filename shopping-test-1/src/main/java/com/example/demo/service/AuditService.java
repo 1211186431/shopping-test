@@ -46,16 +46,43 @@ public interface AuditService {
       */
      public ArrayList<BusinessAudit> getAuditByAdmin(int adminId);
      
+     /**
+      * 管理员获取全部的商品
+      * @return
+      */
      public ArrayList<Goods> getGoodsByAdmin();
      
+     /**
+      * 管理员获取全部的评论
+      * @return
+      */
      public ArrayList<UserComment> getAllComment();
      
+     /**
+      * 管理员获取全部的用户
+      * @return
+      */
      public ArrayList<UserInfo> getAllUser();
      
+     /**
+      * 管理员更新订单状态
+      * @param state
+      * @param goodsId
+      */
      public void updateGoodsByAdmin(int state,int goodsId);
      
+     /**
+      * 管理员更新评论状态
+      * @param state
+      * @param commentId
+      */
      public void updateAllComment(int state,int commentId);
      
+     /**
+      * 管理员更新订单状态
+      * @param state
+      * @param userId
+      */
      public void updateAllUser(int state,int userId);
      
      

@@ -3,6 +3,11 @@ package com.example.demo.helper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+/**
+ * 辅助类，在job中获取mapper
+ * @author dy-xx
+ *
+ */
 @Component
 public class ApplicationContextUtil implements ApplicationContextAware{
 
